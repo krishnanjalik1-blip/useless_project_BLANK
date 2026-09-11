@@ -2,7 +2,7 @@
 
 
 
-# [VAALU-X] 🎯
+# VAALU-X 🐕🎯
 
 
 ## Basic Details
@@ -10,8 +10,8 @@
 
 
 ### Team Members
-- Team Lead: ANJALI KRISHNA K - [NSS COLLEGE OF ENGINEERING,PALAKKAD]
-- Member 2: SANIYA GEORGE - [NSS COLLEGE OF ENGINEERINNG,PALAKKAD]
+- Team Lead: ANJALI KRISHNA K - NSS COLLEGE OF ENGINEERING,PALAKKAD
+- Member 2: SANIYA GEORGE - NSS COLLEGE OF ENGINEERINNG,PALAKKAD
 
 ### Project Description
 [2-3 lines about what your project does]
