@@ -3,16 +3,286 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ammavan Reaction Zone</title>
+  <title>Ammavan Reaction Zone | Kuzhal Lab</title>
   <link rel="stylesheet" href="style.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: var(--bg-color, #f4efe6);
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    .ml-text {
+      font-family: 'Baloo Chettan 2', cursive, sans-serif;
+    }
+
+    .main-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 4px solid #000;
+      box-shadow: 8px 8px 0px #000;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.2rem;
+      position: relative;
+    }
+
+    .card-title {
+      background: #ffde59;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 0.5rem 1.2rem;
+      font-size: 1.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      border-radius: 6px;
+    }
+
+    /* Ammavan Avatar Container */
+    .ammavan-frame {
+      width: 190px;
+      height: 190px;
+      background: #ffde59;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0px #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.5rem;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.1s, background-color 0.3s;
+    }
+
+    .ammavan-frame:hover {
+      transform: scale(1.03);
+    }
+
+    .ammavan-frame.drop-hover {
+      background: #00f0ff;
+      border-color: #ff007f;
+      transform: scale(1.1) rotate(3deg);
+    }
+
+    .ammavan-frame.shake {
+      animation: brutalShake 0.3s infinite;
+    }
+
+    @keyframes brutalShake {
+      0% { transform: translate(2px, 2px) rotate(0deg); }
+      20% { transform: translate(-3px, 0px) rotate(-4deg); }
+      40% { transform: translate(3px, -2px) rotate(4deg); }
+      60% { transform: translate(-2px, 2px) rotate(-2deg); }
+      80% { transform: translate(2px, -1px) rotate(2deg); }
+      100% { transform: translate(0px, 0px) rotate(0deg); }
+    }
+
+    /* Mood / Anger Bar */
+    .meter-container {
+      width: 100%;
+      max-width: 400px;
+      background: #e2e8f0;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      border-radius: 8px;
+      height: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, #22c55e, #ffde59, #ff007f);
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .meter-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Dialogue Box */
+    .speech-box {
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: #fff;
+      border: 4px solid #000;
+      padding: 1.2rem;
+      box-shadow: 5px 5px 0px #000;
+      border-radius: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .speech-box::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 12px 16px 12px;
+      border-style: solid;
+      border-color: transparent transparent #000 transparent;
+    }
+
+    /* Floating Draggable Elements Bar & Items */
+    .drag-rack {
+      background: #0f172a;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .drag-rack-title {
+      color: #00f0ff;
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .drag-items-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .floating-item {
+      width: 55px;
+      height: 55px;
+      background: #ffffff;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: grab;
+      touch-action: none;
+      transition: transform 0.1s;
+      z-index: 100;
+      position: relative;
+    }
+
+    .floating-item:active {
+      cursor: grabbing;
+      transform: scale(1.2);
+      box-shadow: 6px 6px 0px #000;
+    }
+
+    .floating-item .item-tooltip {
+      position: absolute;
+      bottom: -22px;
+      font-size: 0.65rem;
+      font-weight: 900;
+      background: #ffde59;
+      border: 1px solid #000;
+      padding: 1px 4px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      color: #000;
+    }
+
+    /* Floating Ambient Elements */
+    .ambient-float {
+      position: absolute;
+      pointer-events: auto;
+      cursor: grab;
+      animation: floatIdle 4s ease-in-out infinite alternate;
+      z-index: 10;
+    }
+
+    @keyframes floatIdle {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-12px) rotate(8deg); }
+    }
+
+    /* Action Grid Buttons */
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 0.9rem;
+      padding: 0.8rem;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.1s;
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000;
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .btn-yellow { background: #ffde59; color: #000; }
+    .btn-pink { background: #ff007f; color: #fff; }
+    .btn-green { background: #22c55e; color: #000; }
+    .btn-cyan { background: #00f0ff; color: #000; }
+  </style>
 </head>
 <body>
 
-  <div class="header-container">
+  <!-- Navigation Bar -->
+  <div class="header-container" style="margin-bottom: 1.5rem;">
     <nav>
       <a href="index.html" class="brand">🐕 KUZHAL LAB v4.0</a>
       <div class="nav-links">
-        <a href="home.html" class="nav-btn">🏛️ Bureau</a>
+        <a href="index.html" class="nav-btn">🏛️ Bureau</a>
         <a href="game.html" class="nav-btn">🕹️ Kuzhal Arcade</a>
         <a href="ammavan.html" class="nav-btn active">👴 Ammavan Zone</a>
         <a href="certificate.html" class="nav-btn">📜 Certificate</a>
@@ -21,61 +291,341 @@
   </div>
 
   <div class="main-wrapper">
-    <div class="card" style="text-align:center; align-items:center;">
-      <span class="card-title">AMMAVAN REACTION CHAMBER</span>
+
+    <!-- FLOATING MOVABLE BACKGROUND DECORATIONS -->
+    <div class="floating-item ambient-float" style="top: -10px; left: 20px; animation-delay: 0s;" title="Drag me!">
+      🌀<span class="item-tooltip">Tail</span>
+    </div>
+    <div class="floating-item ambient-float" style="top: 40px; right: 10px; animation-delay: 1.5s;" title="Drag me!">
+      📢<span class="item-tooltip">Shout</span>
+    </div>
+    <div class="floating-item ambient-float" style="bottom: 10px; left: -10px; animation-delay: 0.8s;" title="Drag me!">
+      🦴<span class="item-tooltip">Bone</span>
+    </div>
+
+    <!-- MAIN CARD CONTAINER -->
+    <div class="card">
+      <span class="card-title">👴 AMMAVAN REACTION CHAMBER</span>
+
+      <!-- Anger / Patience Meter -->
+      <div class="meter-container" title="Ammavan Anger Level">
+        <div class="meter-fill" id="angerFill"></div>
+        <span class="meter-label" id="angerText">Patience Level: 75%</span>
+      </div>
 
       <!-- Animated SVG Ammavan Face -->
-      <div style="width:160px; height:160px; background:#ffde59; border:4px solid #000; box-shadow:4px 4px 0px #000; display:flex; align-items:center; justify-content:center; margin-top:1rem;">
-        <svg width="130" height="130" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="#fbcfe8" stroke="#000" stroke-width="3"/>
-          <path d="M 25 35 Q 38 28 45 35" fill="none" stroke="#000" stroke-width="3"/>
-          <path d="M 55 35 Q 62 28 75 35" fill="none" stroke="#000" stroke-width="3"/>
-          <circle cx="38" cy="45" r="4" fill="#000"/>
-          <circle cx="62" cy="45" r="4" fill="#000"/>
-          <!-- Mustache -->
-          <path d="M 25 60 C 35 52 48 62 50 62 C 52 62 65 52 75 60 C 80 68 65 70 50 65 C 35 70 20 68 25 60 Z" fill="#000"/>
-          <!-- Glasses (Hidden by default) -->
+      <div class="ammavan-frame" id="ammavanFrame" title="Click Ammavan or Drag Items Here!">
+        <svg width="150" height="150" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="#fbcfe8" stroke="#000" stroke-width="3"/>
+          
+          <!-- Eyebrows (Dynamic Angle) -->
+          <path id="leftBrow" d="M 25 35 Q 35 30 45 35" fill="none" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <path id="rightBrow" d="M 55 35 Q 65 30 75 35" fill="none" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          
+          <!-- Eyes -->
+          <circle id="leftEye" cx="36" cy="44" r="4.5" fill="#000"/>
+          <circle id="rightEye" cx="64" cy="44" r="4.5" fill="#000"/>
+          
+          <!-- Ears -->
+          <circle cx="7" cy="50" r="6" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          <circle cx="93" cy="50" r="6" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          
+          <!-- Nose -->
+          <path d="M 50 44 L 46 53 L 52 53" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- Interactive Moustache (Spins on click) -->
+          <g id="mustacheGroup" style="transform-origin: 50px 63px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;">
+            <path d="M 23 60 C 33 50 47 62 50 63 C 53 62 67 50 77 60 C 83 68 67 72 50 66 C 33 72 17 68 23 60 Z" fill="#000"/>
+          </g>
+          
+          <!-- Thug Life Glasses (Hidden by default) -->
           <g id="ammavanGlasses" style="display:none;">
-            <polygon points="20,38 48,38 44,48 24,48" fill="#000"/>
-            <polygon points="52,38 80,38 76,48 56,48" fill="#000"/>
+            <polygon points="18,36 48,36 44,48 22,48" fill="#000"/>
+            <polygon points="52,36 82,36 78,48 56,48" fill="#000"/>
+            <line x1="48" y1="40" x2="52" y2="40" stroke="#000" stroke-width="3"/>
+            <!-- White Shine -->
+            <polygon points="22,38 32,38 26,46 20,46" fill="#fff" opacity="0.6"/>
+            <polygon points="56,38 66,38 60,46 54,46" fill="#fff" opacity="0.6"/>
           </g>
         </svg>
       </div>
 
-      <div id="ammavanDialogue" style="font-size:1.1rem; font-weight:900; background:#fff; border:3px solid #000; padding:1rem; box-shadow:4px 4px 0px #000; margin:1rem 0; width:100%;">
+      <!-- Dialogue Speech Box -->
+      <div class="speech-box ml-text" id="ammavanDialogue">
         👴 "Njan paranjille makkale... panthrandu kollam kuzhallittalum nivarilla!"
       </div>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:0.8rem; width:100%;">
+      <!-- DRAGGABLE ITEMS TOOLBAR -->
+      <div class="drag-rack">
+        <span class="drag-rack-title">🖐️ DRAG & DROP ITEMS ONTO AMMAVAN:</span>
+        <div class="drag-items-wrapper">
+          
+          <div class="floating-item" id="itemPayasam" data-type="payasam" title="Offer Payasam">
+            🥣<span class="item-tooltip">Payasam</span>
+          </div>
+          
+          <div class="floating-item" id="itemPipe" data-type="pipe" title="Slap with PVC Pipe">
+            📜<span class="item-tooltip">PVC Pipe</span>
+          </div>
+          
+          <div class="floating-item" id="itemChaya" data-type="chaya" title="Offer Chaya">
+            ☕<span class="item-tooltip">Chaya</span>
+          </div>
+          
+          <div class="floating-item" id="itemGlasses" data-type="glasses" title="Give Thug Shades">
+            🕶️<span class="item-tooltip">Shades</span>
+          </div>
+
+          <div class="floating-item" id="itemChilli" data-type="chilli" title="Feed Chilli">
+            🌶️<span class="item-tooltip">Kanthari</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ACTION BUTTONS GRID -->
+      <div class="btn-grid">
         <button class="btn btn-yellow" id="btnPayasam">🥣 Offer Payasam</button>
         <button class="btn btn-pink" id="btnSteam">🔥 Apply 500 PSI</button>
         <button class="btn btn-green" id="btnGenz">🕶️ Inject GenZ CSS</button>
+        <button class="btn btn-cyan" id="btnProverb">🔊 Random Advice</button>
       </div>
     </div>
   </div>
 
   <script src="script.js"></script>
   <script>
+    // Audio Fallbacks if script.js isn't fully loaded
+    function safeAudio(freq = 440, type = 'sine', duration = 0.15) {
+      if (typeof playAudio === 'function') {
+        playAudio(freq, type, duration);
+        return;
+      }
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + duration);
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // State Variables
+    let angerLevel = 25; // 0 (Happy) to 100 (Exploding)
     const dialogue = document.getElementById('ammavanDialogue');
     const glasses = document.getElementById('ammavanGlasses');
+    const ammavanFrame = document.getElementById('ammavanFrame');
+    const angerFill = document.getElementById('angerFill');
+    const angerText = document.getElementById('angerText');
+    const mustacheGroup = document.getElementById('mustacheGroup');
 
+    const leftBrow = document.getElementById('leftBrow');
+    const rightBrow = document.getElementById('rightBrow');
+
+    const proverbs = [
+      '👴 "Njan paranjille makkale... panthrandu kollam kuzhallittalum nivarilla!"',
+      '👴 "Our old generation knew physics without any AI algorithms, makkale!"',
+      '👴 "Back in my day, we tested tails with copper pipes, not high-tech simulators!"',
+      '👴 "What is this GenZ tail straightening hype? Focus on your studies first!"',
+      '👴 "Engineering students spend 4 years on dog tail formulas? Enthokke kaananam!"',
+      '👴 "If 500 PSI steam pressure cannot uncurl it, nothing in this world can!"'
+    ];
+
+    // Update Mood Visuals
+    function updateMood(change) {
+      angerLevel = Math.max(0, Math.min(100, angerLevel + change));
+      angerFill.style.width = angerLevel + '%';
+
+      if (angerLevel < 30) {
+        angerText.textContent = `Mood: Calm & Happy 😊 (${100 - angerLevel}%)`;
+        leftBrow.setAttribute('d', 'M 25 32 Q 35 36 45 32');
+        rightBrow.setAttribute('d', 'M 55 32 Q 65 36 75 32');
+        ammavanFrame.classList.remove('shake');
+      } else if (angerLevel < 70) {
+        angerText.textContent = `Mood: Annoyed 😐 (Patience ${100 - angerLevel}%)`;
+        leftBrow.setAttribute('d', 'M 25 35 Q 35 30 45 35');
+        rightBrow.setAttribute('d', 'M 55 35 Q 65 30 75 35');
+        ammavanFrame.classList.remove('shake');
+      } else {
+        angerText.textContent = `Mood: HIGH ANGER! 😡 (${angerLevel}%)`;
+        leftBrow.setAttribute('d', 'M 25 38 Q 35 28 45 38');
+        rightBrow.setAttribute('d', 'M 55 38 Q 65 28 75 38');
+        ammavanFrame.classList.add('shake');
+        safeAudio(150, 'sawtooth', 0.2);
+      }
+    }
+
+    // Spin Mustache on Direct Click
+    let mustacheAngle = 0;
+    mustacheGroup.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mustacheAngle += 360;
+      mustacheGroup.style.transform = `rotate(${mustacheAngle}deg)`;
+      safeAudio(600, 'triangle', 0.1);
+      dialogue.innerHTML = '👴 "Hey! Don\'t mess with my signature Ammavan mustache!"';
+      updateMood(10);
+    });
+
+    // Ammavan Avatar Direct Tap
+    ammavanFrame.addEventListener('click', () => {
+      safeAudio(350, 'sine', 0.1);
+      const randomQuote = proverbs[Math.floor(Math.random() * proverbs.length)];
+      dialogue.innerHTML = randomQuote;
+    });
+
+    // Button 1: Payasam
     document.getElementById('btnPayasam').addEventListener('click', () => {
-      playAudio(440, 'sine', 0.2);
+      safeAudio(523.25, 'sine', 0.25);
       glasses.style.display = 'none';
-      dialogue.innerHTML = '👴 "Ah! Payasam! But the tail is still curly. Proverb remains undefeated!"';
+      dialogue.innerHTML = '👴 "Ah! Palada Payasam! Delicious! But the tail is still curly. Proverb remains undefeated!"';
+      updateMood(-25);
     });
 
+    // Button 2: Steam Pressure
     document.getElementById('btnSteam').addEventListener('click', () => {
-      playAudio(200, 'sawtooth', 0.3);
+      safeAudio(180, 'sawtooth', 0.4);
       glasses.style.display = 'none';
-      dialogue.innerHTML = '👴 "Aiyyo! Extreme steam pressure! My proverb logic is melting!"';
+      dialogue.innerHTML = '👴 "Aiyyo! Extreme steam pressure! My proverb logic is melting under 500 PSI!"';
+      updateMood(35);
     });
 
+    // Button 3: GenZ CSS
     document.getElementById('btnGenz').addEventListener('click', () => {
-      playWinSound();
+      if (typeof playWinSound === 'function') playWinSound();
+      else safeAudio(880, 'square', 0.3);
       glasses.style.display = 'block';
       dialogue.innerHTML = '👴 (DEFEATED): "<code>transform: rotate(0deg) !important</code> destroyed my 12-year theorem!"';
+      updateMood(-10);
     });
+
+    // Button 4: Random Proverb
+    document.getElementById('btnProverb').addEventListener('click', () => {
+      safeAudio(440, 'sine', 0.15);
+      const randomQuote = proverbs[Math.floor(Math.random() * proverbs.length)];
+      dialogue.innerHTML = randomQuote;
+    });
+
+    // ===================================================
+    // DRAGGABLE MOVABLE ELEMENTS SYSTEM (Pointer Events)
+    // ===================================================
+    const draggables = document.querySelectorAll('.floating-item');
+
+    draggables.forEach(el => {
+      let isDragging = false;
+      let startX, startY;
+      let origLeft = el.style.left;
+      let origTop = el.style.top;
+
+      el.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        el.setPointerCapture(e.pointerId);
+        el.style.zIndex = '1000';
+        el.style.position = 'fixed';
+
+        startX = e.clientX;
+        startY = e.clientY;
+        updatePosition(e.clientX, e.clientY);
+        safeAudio(300, 'sine', 0.05);
+      });
+
+      el.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        updatePosition(e.clientX, e.clientY);
+
+        // Check if hovering over Ammavan Face frame
+        const frameRect = ammavanFrame.getBoundingClientRect();
+        if (
+          e.clientX >= frameRect.left &&
+          e.clientX <= frameRect.right &&
+          e.clientY >= frameRect.top &&
+          e.clientY <= frameRect.bottom
+        ) {
+          ammavanFrame.classList.add('drop-hover');
+        } else {
+          ammavanFrame.classList.remove('drop-hover');
+        }
+      });
+
+      el.addEventListener('pointerup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        el.releasePointerCapture(e.pointerId);
+        ammavanFrame.classList.remove('drop-hover');
+
+        const frameRect = ammavanFrame.getBoundingClientRect();
+        // Check if dropped inside Ammavan target drop zone
+        if (
+          e.clientX >= frameRect.left &&
+          e.clientX <= frameRect.right &&
+          e.clientY >= frameRect.top &&
+          e.clientY <= frameRect.bottom
+        ) {
+          handleItemDrop(el.getAttribute('data-type'));
+        }
+
+        // Reset position back to container
+        el.style.position = 'relative';
+        el.style.left = '0px';
+        el.style.top = '0px';
+        el.style.zIndex = '100';
+      });
+
+      function updatePosition(x, y) {
+        el.style.left = `${x - 27}px`;
+        el.style.top = `${y - 27}px`;
+      }
+    });
+
+    // Handle Drop Actions & React
+    function handleItemDrop(type) {
+      switch (type) {
+        case 'payasam':
+          safeAudio(600, 'sine', 0.3);
+          dialogue.innerHTML = '🥣 "Slurp! Mmm... Delicious Payasam! Ammavan anger dropped by 30%!"';
+          glasses.style.display = 'none';
+          updateMood(-30);
+          break;
+
+        case 'pipe':
+          safeAudio(120, 'sawtooth', 0.3);
+          dialogue.innerHTML = '💥 "Ouch! Don\'t hit Ammavan with the 12-year PVC pipe!"';
+          updateMood(40);
+          break;
+
+        case 'chaya':
+          safeAudio(480, 'triangle', 0.25);
+          dialogue.innerHTML = '☕ "Ah, hot Kattan Chaya! Refreshing break from dog tail physics!"';
+          updateMood(-20);
+          break;
+
+        case 'glasses':
+          if (typeof playWinSound === 'function') playWinSound();
+          else safeAudio(750, 'square', 0.25);
+          glasses.style.display = 'block';
+          dialogue.innerHTML = '🕶️ "Thug Life Ammavan unlocked: \'GenZ physics cannot defeat my experience!\'"';
+          updateMood(-15);
+          break;
+
+        case 'chilli':
+          safeAudio(220, 'sawtooth', 0.4);
+          dialogue.innerHTML = '🌶️ "AYYYOOO! Kanthari Chilli! Ammavan is breathing 1000 PSI fire!"';
+          updateMood(50);
+          break;
+
+        default:
+          safeAudio(440, 'sine', 0.1);
+          dialogue.innerHTML = '👴 "What did you drop on me, makkale?!"';
+          break;
+      }
+    }
+
+    // Initial setup
+    updateMood(0);
   </script>
 </body>
 </html>

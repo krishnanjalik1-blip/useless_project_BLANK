@@ -5,27 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kuzhal Arcade | Hydraulic Press 3000</title>
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Cool Malayalam & Brutalist Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&family=Space+Grotesk:wght@800;900&display=swap" rel="stylesheet">
+
   <style>
+    body {
+      background-color: var(--bg-color, #f4efe6);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .ml-text {
+      font-family: 'Baloo Chettan 2', cursive, sans-serif;
+      font-weight: 800;
+    }
+
     .game-meter-box {
       width: 100%;
       height: 35px;
       background: #e2e8f0;
-      border: 3px solid #000;
+      border: 4px solid #000;
+      box-shadow: 4px 4px 0px #000;
       position: relative;
       overflow: hidden;
+      border-radius: 8px;
     }
+
     .game-meter-fill {
       height: 100%;
       width: 0%;
-      background: var(--accent-pink);
+      background: linear-gradient(90deg, #ff007f, #ffde59, #00f0ff);
       transition: width 0.08s linear;
     }
+
     .pump-btn {
-      font-size: 1.2rem;
-      padding: 1.5rem;
-      background: var(--accent-pink);
+      font-size: 1.3rem;
+      padding: 1.4rem 2rem;
+      background: var(--accent-pink, #ff007f);
       color: #fff;
       user-select: none;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0px #000;
+      font-weight: 900;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.05s ease, box-shadow 0.05s ease;
+    }
+
+    .pump-btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 2px 2px 0px #000;
+      background: var(--accent-cyan, #00f0ff);
+      color: #000;
+    }
+
+    /* Dialogue Banner Styling */
+    .cinema-dialogue-card {
+      background: #fff;
+      border: 4px solid #000;
+      box-shadow: 5px 5px 0px #000;
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      position: relative;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cinema-dialogue-text {
+      font-size: 1.15rem;
+      color: #000;
+      margin: 0;
+      line-height: 1.3;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    /* Floating Pop-up Dialogues on Press */
+    .pop-text {
+      position: absolute;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #ff007f;
+      background: #ffde59;
+      border: 3px solid #000;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      box-shadow: 3px 3px 0px #000;
+      pointer-events: none;
+      animation: floatUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) FORWARD;
+      z-index: 100;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(0.6) rotate(-5deg); }
+      50% { transform: translateY(-35px) scale(1.1) rotate(5deg); }
+      100% { opacity: 0; transform: translateY(-70px) scale(0.9); }
+    }
+
+    /* Animated Dog Avatar in Arena */
+    .dog-avatar {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 65px;
+      height: 65px;
+      filter: drop-shadow(3px 3px 0px #000);
     }
   </style>
 </head>
@@ -43,30 +132,80 @@
     </nav>
   </div>
 
-  <div class="main-wrapper">
-    <div class="card">
-      <span class="card-title">HYDRAULIC PRESS MINI-GAME</span>
-      <p style="font-size:0.85rem; font-weight:bold;">MASH THE PUMP BUTTON TO DEFEAT ELASTIC RECOVERY BEFORE TIME RUNS OUT!</p>
+  <div class="main-wrapper" style="max-width: 780px; margin: 0 auto; padding: 1.5rem;">
+    <div class="card" style="background:#fff; border:5px solid #000; box-shadow:10px 10px 0px #000; border-radius:14px; padding:2rem; position:relative; overflow:hidden;">
+      
+      <span class="card-title" style="font-size:1.6rem; font-weight:900; display:block; margin-bottom:0.4rem; text-transform:uppercase;">
+        ⚙️ HYDRAULIC PRESS 3000: CINEMA EDITION
+      </span>
+      
+      <p style="font-size:0.95rem; font-weight:800; margin-bottom:1.5rem;">
+        MASH THE PUMP BUTTON TO DEFEAT MALAYALAM ELASTICITY BEFORE AMMAVAN SCALPS YOU!
+      </p>
 
-      <div class="stage-box" style="background:#00f0ff;">
-        <svg width="100%" height="160" viewBox="0 0 500 160">
+      <!-- Live Malayalam Cinema Commentary Box -->
+      <div class="cinema-dialogue-card" id="dialogueBox">
+        <p class="cinema-dialogue-text ml-text" id="cinemaQuote">
+          🎬 "ഇപ്പൊ ശരിയാക്കി തരാം! Lever അടിക്കടാ ദാസാ!"
+        </p>
+      </div>
+
+      <!-- Stage Arena -->
+      <div class="stage-box" id="stageArena" style="background:#00f0ff; border:4px solid #000; box-shadow:6px 6px 0px #000; border-radius:12px; position:relative; overflow:hidden; margin-bottom:1.5rem;">
+        
+        <!-- Live Dog Reaction Graphic inside stage -->
+        <svg class="dog-avatar" viewBox="0 0 100 100" id="dogAvatar">
+          <circle cx="50" cy="50" r="40" fill="#ffde59" stroke="#000" stroke-width="4"/>
+          <!-- Dog Eyes -->
+          <circle cx="36" cy="42" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+          <circle cx="64" cy="42" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+          <circle cx="38" cy="42" r="3" fill="#000" id="leftPupil"/>
+          <circle cx="62" cy="42" r="3" fill="#000" id="rightPupil"/>
+          <!-- Dog Snout & Tongue -->
+          <ellipse cx="50" cy="58" rx="12" ry="8" fill="#fff" stroke="#000" stroke-width="2"/>
+          <polygon points="50,52 44,58 56,58" fill="#000"/>
+          <path id="dogTongue" d="M 46 64 Q 50 74 54 64 Z" fill="#ff007f" stroke="#000" stroke-width="2"/>
+        </svg>
+
+        <svg width="100%" height="180" viewBox="0 0 500 180">
+          <!-- Press Frame Grid backdrop -->
+          <line x1="50" y1="0" x2="50" y2="180" stroke="#000" stroke-width="6"/>
+          <line x1="450" y1="0" x2="450" y2="180" stroke="#000" stroke-width="6"/>
+          <rect x="30" y="150" width="440" height="20" fill="#64748b" stroke="#000" stroke-width="4"/>
+
           <!-- Piston Press -->
-          <rect id="gamePiston" x="180" y="10" width="140" height="20" fill="#000" />
-          <path id="gameTailPath" d="M 50 110 Q 250 10 450 110" fill="none" stroke="#d97706" stroke-width="16" stroke-linecap="round"/>
+          <rect id="gamePiston" x="170" y="10" width="160" height="30" fill="#ff007f" stroke="#000" stroke-width="4" rx="4"/>
+          <rect id="pistonShaft" x="235" y="0" width="30" height="10" fill="#000"/>
+          
+          <!-- Dog Tail under Press -->
+          <path id="gameTailPath" d="M 70 145 Q 250 15 430 145" fill="none" stroke="#d97706" stroke-width="22" stroke-linecap="round"/>
+          <path id="gameTailInner" d="M 70 145 Q 250 15 430 145" fill="none" stroke="#ffde59" stroke-width="8" stroke-linecap="round"/>
         </svg>
       </div>
 
-      <div>
-        <label>HYDRAULIC PRESSURE METER: <span id="pressPSI">0 PSI</span></label>
+      <!-- Meter Section -->
+      <div style="margin-bottom: 1.5rem;">
+        <div style="display:flex; justify-content:space-between; font-weight:900; margin-bottom:0.4rem;">
+          <span>HYDRAULIC FORCE METER</span>
+          <span id="pressPSI" style="color:#ff007f; font-size:1.2rem;">0 PSI</span>
+        </div>
         <div class="game-meter-box">
           <div class="game-meter-fill" id="meterFill"></div>
         </div>
       </div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div>TIME LEFT: <strong id="gameTimer" style="font-size:1.4rem; color:var(--accent-red);">10s</strong></div>
-        <button class="btn pump-btn" id="pumpBtn">💥 PUMP HYDRAULIC LEVER!</button>
+      <!-- Controls & Timer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+        <div style="background:#ffde59; border:3px solid #000; padding:0.8rem 1.2rem; border-radius:10px; box-shadow:4px 4px 0px #000;">
+          <span style="font-weight:900; font-size:0.85rem; display:block;">TIME REMAINING:</span>
+          <strong id="gameTimer" style="font-size:1.8rem; color:#000; font-weight:900;">10s</strong>
+        </div>
+
+        <button class="pump-btn ml-text" id="pumpBtn">
+          💥 അമർത്തട ഉവ്വേ! (PUMP)
+        </button>
       </div>
+
     </div>
   </div>
 
@@ -83,14 +222,105 @@
     const meterFill = document.getElementById('meterFill');
     const gameTimer = document.getElementById('gameTimer');
     const gamePiston = document.getElementById('gamePiston');
+    const pistonShaft = document.getElementById('pistonShaft');
     const gameTailPath = document.getElementById('gameTailPath');
+    const gameTailInner = document.getElementById('gameTailInner');
+    const cinemaQuote = document.getElementById('cinemaQuote');
+    const stageArena = document.getElementById('stageArena');
+    const dogTongue = document.getElementById('dogTongue');
 
-    pumpBtn.addEventListener('click', () => {
+    // Malayalam Cinema Fun Dialogues categorized by intensity
+    const dialoguePool = {
+      start: [
+        "🎬 \"ഇപ്പൊ ശരിയാക്കി തരാം! Lever അടിക്കടാ ദാസാ!\"",
+        "🎬 \"പട്ടിയുടെ വാല് 12 കൊല്ലം കുഴലിലിട്ടാൽ നിവരുമോ? നമുക്ക് നോക്കാം!\"",
+        "🎬 \"എന്താടാ ദാസാ ഈ വാല് നിവരാത്തത്?\""
+      ],
+      pumpingLow: [
+        "🎬 \"ഇതൊക്കെ എന്ത്... ഇതിലും വലിയ പടപ്പുറപ്പാട് ഞാൻ കണ്ടിരിക്കുന്നു!\"",
+        "🎬 \"അയ്യോ അമ്മേ! വാല് ചതയുന്നേ!\"",
+        "🎬 \"സാധനം കയ്യിലുണ്ടോ? വേഗം അമർത്ത്!\"",
+        "🎬 \"പോ മക്കളെ പോയി കേസ് കൊട്!\"",
+        "🎬 \"എന്നെ കൊല്ലാതിരിക്കാൻ വയ്യോ ദാസാ?\""
+      ],
+      pumpingMid: [
+        "🎬 \"അവൻ വീണ്ടും വരുന്നു ഡാ! 500 PSI പോരാ!\"",
+        "🎬 \"താങ്ങാൻ പറ്റുന്നില്ല സർ! എലാസ്റ്റിസിറ്റി കൂടും!\"",
+        "🎬 \"ഓട് മക്കളെ ഓട്രി... വാല് പൊട്ടാൻ പോകുന്നു!\"",
+        "🎬 \"നീ ഏതാടാ നീയൊരു അലവലാതി!\"",
+        "🎬 \"ഹൈഡ്രോളിക് പ്രഷർ പോരാ ഉവ്വേ!\""
+      ],
+      pumpingHigh: [
+        "🎬 \"പവനായി ശവമായി! വാല് നേരെയാകാൻ പോകുന്നു!\"",
+        "🎬 \"കണ്ണാടി കാണുമ്പോൾ സ്വന്തം മുഖം കാണണം! വാല് സ്ട്രെയിറ്റായി!\"",
+        "🎬 \"മാറടാ അങ്ങോട്ട്! അമർത്തടാ 1000 PSI!\"",
+        "🎬 \"ഇതാണ് ഞാൻ പറഞ്ഞ സാങ്കേതിക വിദ്യ!\""
+      ],
+      popWords: [
+        "ഇപ്പൊ ശരിയാക്കാം!",
+        "പവനായി!",
+        "ദാസാ!",
+        "അയ്യോ!",
+        "തള്ളിമറക്ക്!",
+        "കുഴൽ പവർ!",
+        "സവാരി ഗിരിഗിരി!",
+        "കേസ് കൊട്!"
+      ]
+    };
+
+    function updateQuote(text) {
+      cinemaQuote.style.opacity = '0';
+      cinemaQuote.style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        cinemaQuote.textContent = text;
+        cinemaQuote.style.opacity = '1';
+        cinemaQuote.style.transform = 'scale(1)';
+      }, 100);
+    }
+
+    // Spawn floating Malayalam popup text at pump location
+    function spawnPopText(e) {
+      const pop = document.createElement('div');
+      pop.className = 'pop-text ml-text';
+      
+      const randomWord = dialoguePool.popWords[Math.floor(Math.random() * dialoguePool.popWords.length)];
+      pop.textContent = randomWord;
+
+      const rect = stageArena.getBoundingClientRect();
+      const x = Math.random() * (rect.width - 120);
+      const y = rect.height - 60;
+
+      pop.style.left = x + 'px';
+      pop.style.top = y + 'px';
+
+      stageArena.appendChild(pop);
+      setTimeout(() => pop.remove(), 700);
+    }
+
+    pumpBtn.addEventListener('click', (e) => {
       if (!gameActive) startGame();
       
       psi = Math.min(100, psi + 8);
-      playAudio(300 + (psi * 5), 'square', 0.05);
+      
+      // Play retro arcade audio if helper exists
+      if (typeof playAudio === 'function') {
+        playAudio(300 + (psi * 6), 'square', 0.05);
+      }
+
+      spawnPopText(e);
       updateGameUI();
+
+      // Dynamic Dialogue updates based on PSI
+      if (psi > 80 && Math.random() > 0.5) {
+        const q = dialoguePool.pumpingHigh[Math.floor(Math.random() * dialoguePool.pumpingHigh.length)];
+        updateQuote(q);
+      } else if (psi > 40 && Math.random() > 0.6) {
+        const q = dialoguePool.pumpingMid[Math.floor(Math.random() * dialoguePool.pumpingMid.length)];
+        updateQuote(q);
+      } else if (Math.random() > 0.7) {
+        const q = dialoguePool.pumpingLow[Math.floor(Math.random() * dialoguePool.pumpingLow.length)];
+        updateQuote(q);
+      }
     });
 
     function startGame() {
@@ -98,32 +328,45 @@
       psi = 10;
       timeLeft = 10;
 
+      const initialQuote = dialoguePool.start[Math.floor(Math.random() * dialoguePool.start.length)];
+      updateQuote(initialQuote);
+
       timerInterval = setInterval(() => {
         timeLeft--;
         gameTimer.textContent = timeLeft + 's';
-        if (timeLeft <= 0) endGame();
+        if (timeLeft <= 0) endGame(false);
       }, 1000);
 
-      // Tail Elastic Decay (Ammavan Force fighting back)
+      // Tail Elastic Decay (Ammavan Elasticity fighting back)
       decayInterval = setInterval(() => {
         if (psi > 0) {
-          psi = Math.max(0, psi - 3);
+          psi = Math.max(0, psi - 3.5);
           updateGameUI();
         }
-      }, 150);
+      }, 140);
     }
 
     function updateGameUI() {
-      pressPSI.textContent = (psi * 5) + ' PSI';
+      pressPSI.textContent = Math.round(psi * 5) + ' PSI';
       meterFill.style.width = psi + '%';
       
-      // Piston animation moving down
-      const pistonY = 10 + (psi * 0.5);
+      // Move hydraulic piston down
+      const pistonY = 10 + (psi * 1.1);
       gamePiston.setAttribute('y', pistonY);
+      pistonShaft.setAttribute('height', pistonY);
 
-      // Flatten tail path as PSI increases
-      const archY = 10 + (psi * 0.9);
-      gameTailPath.setAttribute('d', `M 50 110 Q 250 ${archY} 450 110`);
+      // Flatten curved tail as PSI increases
+      const archY = 15 + (psi * 1.25);
+      const tailD = `M 70 145 Q 250 ${archY} 430 145`;
+      gameTailPath.setAttribute('d', tailD);
+      gameTailInner.setAttribute('d', tailD);
+
+      // Dog Reacts to pain
+      if (psi > 60) {
+        dogTongue.setAttribute('d', 'M 44 64 Q 50 82 56 64 Z'); // Tongue sticks out in shock
+      } else {
+        dogTongue.setAttribute('d', 'M 46 64 Q 50 74 54 64 Z');
+      }
 
       if (psi >= 100) {
         endGame(true);
@@ -136,13 +379,19 @@
       gameActive = false;
 
       if (victory) {
-        playWinSound();
-        alert("🎉 VICTORY! You applied 500 PSI and straightened the tail! Ammavan is in shock!");
+        if (typeof playWinSound === 'function') playWinSound();
+        updateQuote("🎉 \"സവാരി ഗിരിഗിരി! 500 PSI കൊടുത്ത് വാല് സ്ട്രെയിറ്റാക്കി മക്കളെ! അമ്മാവൻ ഞെട്ടി!\"");
+        setTimeout(() => {
+          alert("🎉 VICTORY!\n\n\"ഇതാണ് ഞാൻ പറഞ്ഞ സാങ്കേതിക വിദ്യ!\"\nYou applied 500 PSI & defeated 12 years of curved tail physics! Ammavan is in utter shock!");
+        }, 150);
       } else {
-        playAudio(150, 'sawtooth', 0.4);
-        alert("👴 TIME UP! Ammavan's elastic recovery won! The tail snapped back into a curve!");
+        if (typeof playAudio === 'function') playAudio(140, 'sawtooth', 0.4);
+        updateQuote("👴 \"നീ പോ ഒലക്ക! 12 കൊല്ലം അല്ല 50 കൊല്ലം ഇട്ടാലും വാല് വളഞ്ഞു തന്നെ ഇരിക്കും!\"");
         psi = 0;
         updateGameUI();
+        setTimeout(() => {
+          alert("👴 TIME UP! AMMAVAN WINS!\n\n\"വീണ്ടും പവനായി ശവമായി!\"\nElastic recovery force was too strong. The tail instantly snapped back into a 180° curve!");
+        }, 150);
       }
     }
   </script>

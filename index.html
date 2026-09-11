@@ -127,6 +127,12 @@
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
+    .speech-sm {
+      max-width: 150px;
+      font-size: 0.78rem;
+      padding: 0.4rem 0.7rem;
+    }
+
     /* Speech Bubble Tail Arrow */
     .cartoon-speech::after {
       content: '';
@@ -152,11 +158,26 @@
       50% { transform: translateY(16px) rotate(-3deg); }
     }
 
-    /* Default Corner Positioning */
-    .c1 { top: 7%; left: 4%; animation: floatY1 4.5s ease-in-out infinite; }
-    .c2 { top: 8%; right: 4%; animation: floatY2 5s ease-in-out infinite; }
-    .c3 { bottom: 6%; left: 5%; animation: floatY2 4.2s ease-in-out infinite; }
-    .c4 { bottom: 7%; right: 5%; animation: floatY1 5.5s ease-in-out infinite; }
+    @keyframes floatY3 {
+      0%, 100% { transform: translateY(0px) rotate(-5deg); }
+      50% { transform: translateY(-12px) rotate(4deg); }
+    }
+
+    @keyframes floatY4 {
+      0%, 100% { transform: translateY(0px) rotate(5deg); }
+      50% { transform: translateY(14px) rotate(-4deg); }
+    }
+
+    /* Default Positioning */
+    .c1 { top: 5%; left: 3%; animation: floatY1 4.5s ease-in-out infinite; }
+    .c2 { top: 5%; right: 3%; animation: floatY2 5s ease-in-out infinite; }
+    .c3 { bottom: 5%; left: 4%; animation: floatY2 4.2s ease-in-out infinite; }
+    .c4 { bottom: 5%; right: 4%; animation: floatY1 5.5s ease-in-out infinite; }
+    
+    /* Medium Sized Floating Dogs */
+    .c5 { top: 42%; left: 2%; animation: floatY3 4.8s ease-in-out infinite; }
+    .c6 { top: 42%; right: 2%; animation: floatY4 5.2s ease-in-out infinite; }
+    .c7 { top: 3%; left: 44%; animation: floatY3 6s ease-in-out infinite; }
   </style>
 </head>
 <body>
@@ -166,79 +187,108 @@
     <div class="cartoon-speech ml-text" id="speech1">👴 "12 കൊല്ലം കാത്തിരുന്നോ!"</div>
     <svg width="95" height="95" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="42" fill="#ffde59" stroke="#000" stroke-width="4"/>
-      <!-- Tufts of side hair -->
       <path d="M 8 45 Q 2 30 14 38 Z" fill="#fff" stroke="#000" stroke-width="3"/>
       <path d="M 92 45 Q 98 30 86 38 Z" fill="#fff" stroke="#000" stroke-width="3"/>
-      <!-- Expressive Eyebrows -->
       <path d="M 24 32 L 42 38" stroke="#000" stroke-width="4" stroke-linecap="round"/>
       <path d="M 76 32 L 58 38" stroke="#000" stroke-width="4" stroke-linecap="round"/>
-      <!-- Glasses -->
       <circle cx="34" cy="46" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
       <circle cx="66" cy="46" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
       <line x1="45" y1="46" x2="55" y2="46" stroke="#000" stroke-width="4"/>
-      <!-- Eyes looking suspicious -->
       <circle cx="37" cy="46" r="4" fill="#000"/>
       <circle cx="69" cy="46" r="4" fill="#000"/>
-      <!-- Thick Malayalam Mustache -->
       <path d="M 22 65 Q 50 50 78 65 Q 50 82 22 65 Z" fill="#000"/>
     </svg>
   </div>
 
-  <!-- Floating Cartoon 2: Goofy Dog -->
+  <!-- Floating Cartoon 2: Goofy Naadan Dog -->
   <div class="float-cartoon c2" id="cartoon2">
     <div class="cartoon-speech ml-text" id="speech2">🐕 "വാൽ നിവർത്താൻ നോക്കണ്ട!"</div>
     <svg width="95" height="95" viewBox="0 0 100 100">
-      <!-- Floppy Ears -->
       <path d="M 18 30 C -2 10 12 -5 28 20 Z" fill="#d97706" stroke="#000" stroke-width="4"/>
       <path d="M 82 30 C 102 10 88 -5 72 20 Z" fill="#d97706" stroke="#000" stroke-width="4"/>
-      <!-- Head -->
       <circle cx="50" cy="52" r="38" fill="#22c55e" stroke="#000" stroke-width="4"/>
-      <!-- Goofy Eyes -->
       <circle cx="36" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/>
       <circle cx="64" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/>
       <circle cx="38" cy="44" r="3" fill="#000"/>
       <circle cx="62" cy="44" r="3" fill="#000"/>
-      <!-- Dog Snout & Tongue -->
       <ellipse cx="50" cy="58" rx="14" ry="10" fill="#fff" stroke="#000" stroke-width="3"/>
       <polygon points="50,52 42,58 58,58" fill="#000"/>
       <path d="M 46 66 Q 50 78 54 66 Z" fill="#ff007f" stroke="#000" stroke-width="2"/>
-      <!-- Spring Curled Tail on side -->
       <path d="M 82 68 C 105 50 90 25 78 38 C 70 48 88 58 76 65" fill="none" stroke="#ffde59" stroke-width="6" stroke-linecap="round"/>
     </svg>
   </div>
 
-  <!-- Floating Cartoon 3: Tired Sweat-dripping PVC Pipe -->
+  <!-- Floating Cartoon 3: Tired PVC Pipe -->
   <div class="float-cartoon c3" id="cartoon3">
     <div class="cartoon-speech ml-text" id="speech3">🧪 "കുഴൽ പൊട്ടിത്തെറിക്കും!"</div>
     <svg width="95" height="95" viewBox="0 0 100 100">
-      <!-- Pipe Body -->
       <rect x="15" y="32" width="70" height="36" fill="#cbd5e1" stroke="#000" stroke-width="4" rx="6"/>
       <rect x="10" y="26" width="14" height="48" fill="#64748b" stroke="#000" stroke-width="4" rx="2"/>
       <rect x="76" y="26" width="14" height="48" fill="#64748b" stroke="#000" stroke-width="4" rx="2"/>
-      <!-- Cartoon Tired Eyes on Pipe -->
       <circle cx="40" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
       <circle cx="60" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
       <line x1="36" y1="42" x2="44" y2="44" stroke="#000" stroke-width="2"/>
       <line x1="64" y1="42" x2="56" y2="44" stroke="#000" stroke-width="2"/>
       <path d="M 44 58 Q 50 52 56 58" fill="none" stroke="#000" stroke-width="3"/>
-      <!-- Sweat Drops -->
       <path d="M 28 22 Q 24 30 28 32 Q 32 30 28 22 Z" fill="#00f0ff" stroke="#000" stroke-width="2"/>
     </svg>
   </div>
 
-  <!-- Floating Cartoon 4: Angry Fire CSS !important Bomb -->
+  <!-- Floating Cartoon 4: CSS Flame Bomb -->
   <div class="float-cartoon c4" id="cartoon4">
     <div class="cartoon-speech" id="speech4">🔥 "!IMPORTANT WON'T HELP!"</div>
     <svg width="95" height="95" viewBox="0 0 100 100">
-      <!-- Flame body -->
       <path d="M 50 10 C 70 30 90 50 80 75 C 70 95 30 95 20 75 C 10 50 30 30 50 10 Z" fill="#ff007f" stroke="#000" stroke-width="4"/>
       <path d="M 50 30 C 62 42 72 58 65 72 C 58 84 42 84 35 72 C 30 58 38 42 50 30 Z" fill="#ffde59" stroke="#000" stroke-width="3"/>
-      <!-- Sunglasses on Flame -->
       <polygon points="28,48 48,48 44,58 32,58" fill="#000"/>
       <polygon points="52,48 72,48 68,58 56,58" fill="#000"/>
       <line x1="48" y1="50" x2="52" y2="50" stroke="#000" stroke-width="3"/>
-      <!-- Smirk -->
       <path d="M 40 68 Q 50 74 60 66" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- NEW MEDIUM FLOATING DOG 5: Orange Pug (360° Tail Spin) -->
+  <div class="float-cartoon c5" id="cartoon5">
+    <div class="cartoon-speech speech-sm ml-text" id="speech5">🌀 "360° സ്പിൻ വാലാണ് എന്റേത്!"</div>
+    <svg width="80" height="80" viewBox="0 0 100 100">
+      <path d="M 20 25 C 5 10 15 0 30 15 Z" fill="#7c2d12" stroke="#000" stroke-width="3"/>
+      <path d="M 80 25 C 95 10 85 0 70 15 Z" fill="#7c2d12" stroke="#000" stroke-width="3"/>
+      <circle cx="50" cy="50" r="38" fill="#ea580c" stroke="#000" stroke-width="4"/>
+      <circle cx="38" cy="45" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+      <circle cx="62" cy="45" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+      <circle cx="40" cy="45" r="3" fill="#000"/>
+      <circle cx="60" cy="45" r="3" fill="#000"/>
+      <ellipse cx="50" cy="60" rx="12" ry="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <circle cx="50" cy="56" r="4" fill="#000"/>
+      <path d="M 85 55 C 105 45 95 20 80 32 C 72 40 90 52 78 60" fill="none" stroke="#ffde59" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- NEW MEDIUM FLOATING DOG 6: Cool Glasses Husky (Spring Tail) -->
+  <div class="float-cartoon c6" id="cartoon6">
+    <div class="cartoon-speech speech-sm ml-text" id="speech6">🕶️ "12 years = 0% Straightness!"</div>
+    <svg width="80" height="80" viewBox="0 0 100 100">
+      <polygon points="18,30 28,5 40,25" fill="#0284c7" stroke="#000" stroke-width="3"/>
+      <polygon points="82,30 72,5 60,25" fill="#0284c7" stroke="#000" stroke-width="3"/>
+      <circle cx="50" cy="50" r="38" fill="#38bdf8" stroke="#000" stroke-width="4"/>
+      <polygon points="22,40 46,40 42,50 26,50" fill="#000"/>
+      <polygon points="54,40 78,40 74,50 58,50" fill="#000"/>
+      <line x1="46" y1="44" x2="54" y2="44" stroke="#000" stroke-width="3"/>
+      <path d="M 40 65 Q 50 72 60 65" fill="none" stroke="#000" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <!-- NEW MEDIUM FLOATING DOG 7: Fluffy Purple Poodle -->
+  <div class="float-cartoon c7" id="cartoon7">
+    <div class="cartoon-speech speech-sm ml-text" id="speech7">🐩 "കുഴലിന്റെ വിസ്താരം പോരാ!"</div>
+    <svg width="80" height="80" viewBox="0 0 100 100">
+      <circle cx="16" cy="45" r="14" fill="#e9d5ff" stroke="#000" stroke-width="3"/>
+      <circle cx="84" cy="45" r="14" fill="#e9d5ff" stroke="#000" stroke-width="3"/>
+      <circle cx="50" cy="50" r="38" fill="#a855f7" stroke="#000" stroke-width="4"/>
+      <circle cx="36" cy="44" r="5" fill="#000"/>
+      <circle cx="64" cy="44" r="5" fill="#000"/>
+      <circle cx="50" cy="54" r="5" fill="#ff007f" stroke="#000" stroke-width="2"/>
+      <path d="M 45 62 Q 50 68 55 62" fill="none" stroke="#000" stroke-width="3"/>
     </svg>
   </div>
 
@@ -282,10 +332,28 @@
         "🔥 \"CSS won't fix biology!\"",
         "🔥 \"ഹൈഡ്രോളിക് പവർ വേണ്ടിവരും!\"",
         "🔥 \"Error 404: Straight tail not found!\""
+      ],
+      dog360: [
+        "🌀 \"360° സ്പിൻ വാലാണ് എന്റേത്!\"",
+        "🌀 \"Pug Tail Spiral Power!\"",
+        "🌀 \"വാല് നിവർന്നാൽ ബോണസ് തരുമോ?\"",
+        "🌀 \"Curved tail supreme!\""
+      ],
+      dogHusky: [
+        "🕶️ \"12 years = 0% Straightness!\"",
+        "🕶️ \"എന്റെ വാലിൽ Spring ഉണ്ടേ!\"",
+        "🕶️ \"Physics lab vs Dog tail!\"",
+        "🕶️ \"Straight tail is a myth!\""
+      ],
+      dogPoodle: [
+        "🐩 \"കുഴലിന്റെ വിസ്താരം പോരാ!\"",
+        "🐩 \"Need 1000 PSI to fix this!\"",
+        "🐩 \"വാല് വളഞ്ഞാലെന്താ, look സുന്ദരമല്ലേ!\"",
+        "🐩 \"Flexing my natural curly tail!\""
       ]
     };
 
-    let idx1 = 0, idx2 = 0, idx3 = 0, idx4 = 0;
+    let idx1 = 0, idx2 = 0, idx3 = 0, idx4 = 0, idx5 = 0, idx6 = 0, idx7 = 0;
 
     // Helper function to animate speech bubble change
     function updateSpeech(elementId, textArray, currentIndex) {
@@ -308,11 +376,17 @@
       idx2 = (idx2 + 1) % dialogues.dog.length;
       idx3 = (idx3 + 1) % dialogues.pipe.length;
       idx4 = (idx4 + 1) % dialogues.flame.length;
+      idx5 = (idx5 + 1) % dialogues.dog360.length;
+      idx6 = (idx6 + 1) % dialogues.dogHusky.length;
+      idx7 = (idx7 + 1) % dialogues.dogPoodle.length;
 
       updateSpeech('speech1', dialogues.ammavan, idx1);
-      setTimeout(() => updateSpeech('speech2', dialogues.dog, idx2), 400);
-      setTimeout(() => updateSpeech('speech3', dialogues.pipe, idx3), 800);
-      setTimeout(() => updateSpeech('speech4', dialogues.flame, idx4), 1200);
+      setTimeout(() => updateSpeech('speech2', dialogues.dog, idx2), 250);
+      setTimeout(() => updateSpeech('speech3', dialogues.pipe, idx3), 500);
+      setTimeout(() => updateSpeech('speech4', dialogues.flame, idx4), 750);
+      setTimeout(() => updateSpeech('speech5', dialogues.dog360, idx5), 1000);
+      setTimeout(() => updateSpeech('speech6', dialogues.dogHusky, idx6), 1250);
+      setTimeout(() => updateSpeech('speech7', dialogues.dogPoodle, idx7), 1500);
     }, 3500);
 
     // Draggable functionality (Supports Touch & Mouse)
@@ -358,7 +432,7 @@
       }
     }
 
-    // Attach dragging to all 4 cartoon elements
+    // Attach dragging to all cartoon elements
     document.querySelectorAll('.float-cartoon').forEach(el => {
       enableDragging(el);
     });
