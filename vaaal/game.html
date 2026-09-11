@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuzhal Arcade | Hydraulic Press 3000</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .game-meter-box {
+      width: 100%;
+      height: 35px;
+      background: #e2e8f0;
+      border: 3px solid #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-meter-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-pink);
+      transition: width 0.08s linear;
+    }
+    .pump-btn {
+      font-size: 1.2rem;
+      padding: 1.5rem;
+      background: var(--accent-pink);
+      color: #fff;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-container">
+    <nav>
+      <a href="index.html" class="brand">🐕 KUZHAL LAB v4.0</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">🏛️ Bureau</a>
+        <a href="game.html" class="nav-btn active">🕹️ Kuzhal Arcade</a>
+        <a href="ammavan.html" class="nav-btn">👴 Ammavan Zone</a>
+        <a href="certificate.html" class="nav-btn">📜 Certificate</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="main-wrapper">
+    <div class="card">
+      <span class="card-title">HYDRAULIC PRESS MINI-GAME</span>
+      <p style="font-size:0.85rem; font-weight:bold;">MASH THE PUMP BUTTON TO DEFEAT ELASTIC RECOVERY BEFORE TIME RUNS OUT!</p>
+
+      <div class="stage-box" style="background:#00f0ff;">
+        <svg width="100%" height="160" viewBox="0 0 500 160">
+          <!-- Piston Press -->
+          <rect id="gamePiston" x="180" y="10" width="140" height="20" fill="#000" />
+          <path id="gameTailPath" d="M 50 110 Q 250 10 450 110" fill="none" stroke="#d97706" stroke-width="16" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div>
+        <label>HYDRAULIC PRESSURE METER: <span id="pressPSI">0 PSI</span></label>
+        <div class="game-meter-box">
+          <div class="game-meter-fill" id="meterFill"></div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>TIME LEFT: <strong id="gameTimer" style="font-size:1.4rem; color:var(--accent-red);">10s</strong></div>
+        <button class="btn pump-btn" id="pumpBtn">💥 PUMP HYDRAULIC LEVER!</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let psi = 0;
+    let timeLeft = 10;
+    let gameActive = false;
+    let timerInterval = null;
+    let decayInterval = null;
+
+    const pumpBtn = document.getElementById('pumpBtn');
+    const pressPSI = document.getElementById('pressPSI');
+    const meterFill = document.getElementById('meterFill');
+    const gameTimer = document.getElementById('gameTimer');
+    const gamePiston = document.getElementById('gamePiston');
+    const gameTailPath = document.getElementById('gameTailPath');
+
+    pumpBtn.addEventListener('click', () => {
+      if (!gameActive) startGame();
+      
+      psi = Math.min(100, psi + 8);
+      playAudio(300 + (psi * 5), 'square', 0.05);
+      updateGameUI();
+    });
+
+    function startGame() {
+      gameActive = true;
+      psi = 10;
+      timeLeft = 10;
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        gameTimer.textContent = timeLeft + 's';
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+
+      // Tail Elastic Decay (Ammavan Force fighting back)
+      decayInterval = setInterval(() => {
+        if (psi > 0) {
+          psi = Math.max(0, psi - 3);
+          updateGameUI();
+        }
+      }, 150);
+    }
+
+    function updateGameUI() {
+      pressPSI.textContent = (psi * 5) + ' PSI';
+      meterFill.style.width = psi + '%';
+      
+      // Piston animation moving down
+      const pistonY = 10 + (psi * 0.5);
+      gamePiston.setAttribute('y', pistonY);
+
+      // Flatten tail path as PSI increases
+      const archY = 10 + (psi * 0.9);
+      gameTailPath.setAttribute('d', `M 50 110 Q 250 ${archY} 450 110`);
+
+      if (psi >= 100) {
+        endGame(true);
+      }
+    }
+
+    function endGame(victory = false) {
+      clearInterval(timerInterval);
+      clearInterval(decayInterval);
+      gameActive = false;
+
+      if (victory) {
+        playWinSound();
+        alert("🎉 VICTORY! You applied 500 PSI and straightened the tail! Ammavan is in shock!");
+      } else {
+        playAudio(150, 'sawtooth', 0.4);
+        alert("👴 TIME UP! Ammavan's elastic recovery won! The tail snapped back into a curve!");
+        psi = 0;
+        updateGameUI();
+      }
+    }
+  </script>
+</body>
+</html>

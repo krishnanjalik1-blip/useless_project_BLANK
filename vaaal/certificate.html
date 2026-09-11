@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Rejection Certificate</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cert-sheet {
+      background: #fcf8f2;
+      border: 6px double #000;
+      padding: 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 6px 6px 0px #000;
+    }
+    .cert-stamp {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-red);
+      border: 4px double var(--accent-red);
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      transform: rotate(-6deg);
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-container">
+    <nav>
+      <a href="index.html" class="brand">🐕 KUZHAL LAB v4.0</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">🏛️ Bureau</a>
+        <a href="game.html" class="nav-btn">🕹️ Kuzhal Arcade</a>
+        <a href="ammavan.html" class="nav-btn">👴 Ammavan Zone</a>
+        <a href="certificate.html" class="nav-btn active">📜 Certificate</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="main-wrapper">
+    <!-- Form Input Card -->
+    <div class="card">
+      <span class="card-title">CUSTOMIZE OFFICIAL CERTIFICATE</span>
+      
+      <div class="control-box">
+        <label>Subject Dog Name:</label>
+        <input type="text" id="dogNameInput" value="Bruno" style="padding:0.6rem; border:2px solid #000; font-weight:bold;">
+      </div>
+
+      <button class="btn btn-pink" id="generateCertBtn">📜 GENERATE OFFICIAL DOCUMENT</button>
+    </div>
+
+    <!-- Live Certificate Preview -->
+    <div class="cert-sheet" id="certSheet">
+      <div style="font-size:0.8rem; font-weight:900;">DEPARTMENT OF TAIL AFFAIRS — FORM 12-B</div>
+      <h2 style="font-size:1.6rem; text-transform:uppercase;">Certificate of Irreversible Curl</h2>
+      
+      <div class="cert-stamp" id="certStamp">NIVARILLA</div>
+
+      <p style="font-size:0.95rem; line-height:1.6;">
+        This is to officially certify that subject <strong id="certDogName" style="text-decoration:underline;">Bruno</strong> has undergone 12 full years of continuous PVC Kuzhal confinement and remains <strong>100% CURLY</strong>.
+      </p>
+
+      <div style="font-size:0.75rem; border-top:2px dashed #000; padding-top:0.8rem; margin-top:1rem;">
+        SIGNED: <em>Dr. K. Achamma (Head Inspector of Kuzhal Physics)</em>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('generateCertBtn').addEventListener('click', () => {
+      const name = document.getElementById('dogNameInput').value || 'Bruno';
+      document.getElementById('certDogName').textContent = name;
+      playWinSound();
+      alert("📜 Official Certificate updated for " + name + "!");
+    });
+  </script>
+</body>
+</html>
