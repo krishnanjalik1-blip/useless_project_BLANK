@@ -2,17 +2,16 @@
 
 
 
-# [Project Name] 🎯
+# [VAALU-X] 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: BLANK
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: ANJALI KRISHNA K - [NSS COLLEGE OF ENGINEERING,PALAKKAD]
+- Member 2: SANIYA GEORGE - [NSS COLLEGE OF ENGINEERINNG,PALAKKAD]
 
 ### Project Description
 [2-3 lines about what your project does]
