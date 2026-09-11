@@ -3,365 +3,642 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Department of Tail Affairs | Home</title>
+  <title>Department of Tail Affairs | Kuzhal Lab</title>
   <link rel="stylesheet" href="style.css">
   
-  <!-- Cool Malayalam & Brutalist Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&family=Space+Grotesk:wght@800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
 
   <style>
     body {
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      background-color: var(--bg-color, #f4efe6);
+      font-family: 'Space Grotesk', sans-serif;
       margin: 0;
       padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      background-color: var(--bg-color, #f4efe6);
     }
 
-    /* Cool Malayalam Font Class */
     .ml-text {
       font-family: 'Baloo Chettan 2', cursive, sans-serif;
-      font-weight: 800;
-      line-height: 1.25;
     }
 
-    /* Central Question Card */
-    .home-card {
-      max-width: 760px;
-      width: 100%;
-      text-align: center;
-      padding: 3.5rem 2rem;
-      z-index: 10;
-      position: relative;
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 900px) {
+      .app-grid {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+
+    .brutal-card {
       background: #ffffff;
-      border: 5px solid #000;
-      box-shadow: 12px 12px 0px #000;
+      border: 4px solid #000;
+      box-shadow: 8px 8px 0px #000;
       border-radius: 12px;
-    }
-
-    .main-question {
-      font-size: clamp(1.4rem, 4.2vw, 2.3rem);
-      font-weight: 900;
-      line-height: 1.35;
-      text-transform: uppercase;
-      color: #000;
-      margin-bottom: 2.2rem;
-      letter-spacing: -0.5px;
-    }
-
-    .main-question .ml-badge {
-      background: var(--accent-yellow, #ffde59);
-      padding: 0.4rem 1rem;
-      border: 4px solid #000;
-      display: inline-block;
-      margin-top: 0.8rem;
-      font-size: clamp(1.3rem, 4vw, 2.2rem);
-      box-shadow: 4px 4px 0px #000;
-      text-transform: none;
-      border-radius: 8px;
-    }
-
-    /* Enter Button */
-    .enter-btn {
-      font-size: 1.25rem;
-      padding: 1.2rem 2.5rem;
-      background: var(--accent-pink, #ff007f);
-      color: #fff;
-      border: 4px solid #000;
-      box-shadow: 6px 6px 0px #000;
-      font-weight: 900;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      text-transform: uppercase;
-      transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border-radius: 10px;
-    }
-
-    .enter-btn:hover {
-      transform: translate(-4px, -4px) scale(1.02);
-      box-shadow: 10px 10px 0px #000;
-      background: var(--accent-cyan, #00f0ff);
-      color: #000;
-    }
-
-    /* Floating Draggable Cartoon Character Containers */
-    .float-cartoon {
-      position: fixed;
-      z-index: 20;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .card-header {
+      background: var(--accent-yellow, #ffde59);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 0.6rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-      filter: drop-shadow(4px 4px 0px #000);
-      transition: transform 0.05s linear;
+      border-radius: 6px;
     }
 
-    .float-cartoon:active {
-      cursor: grabbing;
-      transform: scale(1.12) rotate(4deg) !important;
-      z-index: 50;
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
     }
 
-    /* Expressive Pop Speech Bubbles */
-    .cartoon-speech {
-      background: #ffffff;
+    .input-group label {
+      font-weight: 900;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .input-group input[type="text"],
+    .input-group input[type="number"],
+    .input-group select {
+      background: #f8fafc;
+      border: 3px solid #000;
+      padding: 0.7rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: inherit;
+      border-radius: 6px;
+      outline: none;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .input-group input[type="range"] {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border: 2px solid #000;
+      outline: none;
+      border-radius: 0;
+    }
+
+    .input-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      background: var(--accent-pink, #ff007f);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0px #000;
+      cursor: pointer;
+    }
+
+    /* Calculator Box Styling */
+    .calc-box {
+      background: #0f172a;
+      color: #fff;
       border: 3px solid #000;
       box-shadow: 4px 4px 0px #000;
-      padding: 0.5rem 0.9rem;
-      font-size: 0.85rem;
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .calc-val-display {
+      font-size: 2.2rem;
       font-weight: 900;
-      max-width: 190px;
-      text-align: center;
-      margin-bottom: 10px;
-      border-radius: 14px;
-      pointer-events: none;
+      color: var(--accent-cyan, #00f0ff);
+      text-shadow: 2px 2px 0px #000;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .calc-formula {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-family: monospace;
+      background: rgba(255,255,255,0.05);
+      padding: 0.4rem 0.6rem;
+      border: 1px dashed #475569;
+      border-radius: 4px;
+    }
+
+    /* Action Buttons */
+    .btn-calc {
+      background: var(--accent-cyan, #00f0ff);
+      color: #000;
+      font-size: 1rem;
+      padding: 0.8rem;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: all 0.1s;
+    }
+
+    .btn-calc:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000;
+      background: var(--accent-yellow, #ffde59);
+    }
+
+    .btn-calc:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .btn-sim {
+      background: var(--accent-pink, #ff007f);
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border: 4px solid #000;
+      box-shadow: 5px 5px 0px #000;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 8px;
+      width: 100%;
+      transition: all 0.1s;
+    }
+
+    .btn-sim:hover {
+      background: var(--accent-green, #22c55e);
+      color: #000;
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0px #000;
+    }
+
+    /* Simulator Chamber Frame */
+    .sim-viewport {
+      background: #1e293b;
+      border: 4px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      border-radius: 8px;
       position: relative;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      overflow: hidden;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Speech Bubble Tail Arrow */
-    .cartoon-speech::after {
-      content: '';
+    #steamCanvas {
       position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 10px 10px 0;
-      border-style: solid;
-      border-color: #000 transparent;
-      display: block;
-      width: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
     }
 
-    /* Animation Keyframes */
-    @keyframes floatY1 {
-      0%, 100% { transform: translateY(0px) rotate(-3deg); }
-      50% { transform: translateY(-16px) rotate(3deg); }
+    .badge-tag {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 900;
+      box-shadow: 2px 2px 0px #000;
+      border-radius: 4px;
     }
 
-    @keyframes floatY2 {
-      0%, 100% { transform: translateY(0px) rotate(4deg); }
-      50% { transform: translateY(16px) rotate(-3deg); }
+    /* Sarcastic Gen Z Banner */
+    .genz-banner {
+      background: #ff007f;
+      color: #fff;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 0.8rem;
+      font-weight: 900;
+      font-size: 0.95rem;
+      text-align: center;
+      text-transform: uppercase;
+      border-radius: 6px;
+      display: none;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Default Corner Positioning */
-    .c1 { top: 7%; left: 4%; animation: floatY1 4.5s ease-in-out infinite; }
-    .c2 { top: 8%; right: 4%; animation: floatY2 5s ease-in-out infinite; }
-    .c3 { bottom: 6%; left: 5%; animation: floatY2 4.2s ease-in-out infinite; }
-    .c4 { bottom: 7%; right: 5%; animation: floatY1 5.5s ease-in-out infinite; }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Floating Cartoon 1: Sarcastic Ammavan -->
-  <div class="float-cartoon c1" id="cartoon1">
-    <div class="cartoon-speech ml-text" id="speech1">👴 "12 കൊല്ലം കാത്തിരുന്നോ!"</div>
-    <svg width="95" height="95" viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="42" fill="#ffde59" stroke="#000" stroke-width="4"/>
-      <!-- Tufts of side hair -->
-      <path d="M 8 45 Q 2 30 14 38 Z" fill="#fff" stroke="#000" stroke-width="3"/>
-      <path d="M 92 45 Q 98 30 86 38 Z" fill="#fff" stroke="#000" stroke-width="3"/>
-      <!-- Expressive Eyebrows -->
-      <path d="M 24 32 L 42 38" stroke="#000" stroke-width="4" stroke-linecap="round"/>
-      <path d="M 76 32 L 58 38" stroke="#000" stroke-width="4" stroke-linecap="round"/>
-      <!-- Glasses -->
-      <circle cx="34" cy="46" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
-      <circle cx="66" cy="46" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
-      <line x1="45" y1="46" x2="55" y2="46" stroke="#000" stroke-width="4"/>
-      <!-- Eyes looking suspicious -->
-      <circle cx="37" cy="46" r="4" fill="#000"/>
-      <circle cx="69" cy="46" r="4" fill="#000"/>
-      <!-- Thick Malayalam Mustache -->
-      <path d="M 22 65 Q 50 50 78 65 Q 50 82 22 65 Z" fill="#000"/>
-    </svg>
+  <!-- Navigation Bar -->
+  <div class="header-container" style="margin-bottom: 1.5rem;">
+    <nav>
+      <a href="index.html" class="brand">🐕 KUZHAL LAB v4.0</a>
+      <div class="nav-links">
+        <a href="home.html" class="nav-btn active">🏛️ Bureau</a>
+        <a href="game.html" class="nav-btn">🕹️ Kuzhal Arcade</a>
+        <a href="ammavan.html" class="nav-btn">👴 Ammavan Zone</a>
+        <a href="certificate.html" class="nav-btn">📜 Certificate</a>
+      </div>
+    </nav>
   </div>
 
-  <!-- Floating Cartoon 2: Goofy Dog -->
-  <div class="float-cartoon c2" id="cartoon2">
-    <div class="cartoon-speech ml-text" id="speech2">🐕 "വാൽ നിവർത്താൻ നോക്കണ്ട!"</div>
-    <svg width="95" height="95" viewBox="0 0 100 100">
-      <!-- Floppy Ears -->
-      <path d="M 18 30 C -2 10 12 -5 28 20 Z" fill="#d97706" stroke="#000" stroke-width="4"/>
-      <path d="M 82 30 C 102 10 88 -5 72 20 Z" fill="#d97706" stroke="#000" stroke-width="4"/>
-      <!-- Head -->
-      <circle cx="50" cy="52" r="38" fill="#22c55e" stroke="#000" stroke-width="4"/>
-      <!-- Goofy Eyes -->
-      <circle cx="36" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/>
-      <circle cx="64" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/>
-      <circle cx="38" cy="44" r="3" fill="#000"/>
-      <circle cx="62" cy="44" r="3" fill="#000"/>
-      <!-- Dog Snout & Tongue -->
-      <ellipse cx="50" cy="58" rx="14" ry="10" fill="#fff" stroke="#000" stroke-width="3"/>
-      <polygon points="50,52 42,58 58,58" fill="#000"/>
-      <path d="M 46 66 Q 50 78 54 66 Z" fill="#ff007f" stroke="#000" stroke-width="2"/>
-      <!-- Spring Curled Tail on side -->
-      <path d="M 82 68 C 105 50 90 25 78 38 C 70 48 88 58 76 65" fill="none" stroke="#ffde59" stroke-width="6" stroke-linecap="round"/>
-    </svg>
-  </div>
+  <div class="app-grid">
 
-  <!-- Floating Cartoon 3: Tired Sweat-dripping PVC Pipe -->
-  <div class="float-cartoon c3" id="cartoon3">
-    <div class="cartoon-speech ml-text" id="speech3">🧪 "കുഴൽ പൊട്ടിത്തെറിക്കും!"</div>
-    <svg width="95" height="95" viewBox="0 0 100 100">
-      <!-- Pipe Body -->
-      <rect x="15" y="32" width="70" height="36" fill="#cbd5e1" stroke="#000" stroke-width="4" rx="6"/>
-      <rect x="10" y="26" width="14" height="48" fill="#64748b" stroke="#000" stroke-width="4" rx="2"/>
-      <rect x="76" y="26" width="14" height="48" fill="#64748b" stroke="#000" stroke-width="4" rx="2"/>
-      <!-- Cartoon Tired Eyes on Pipe -->
-      <circle cx="40" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
-      <circle cx="60" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
-      <line x1="36" y1="42" x2="44" y2="44" stroke="#000" stroke-width="2"/>
-      <line x1="64" y1="42" x2="56" y2="44" stroke="#000" stroke-width="2"/>
-      <path d="M 44 58 Q 50 52 56 58" fill="none" stroke="#000" stroke-width="3"/>
-      <!-- Sweat Drops -->
-      <path d="M 28 22 Q 24 30 28 32 Q 32 30 28 22 Z" fill="#00f0ff" stroke="#000" stroke-width="2"/>
-    </svg>
-  </div>
+    <!-- LEFT COLUMN: INPUTS & CALCULATOR -->
+    <div class="brutal-card">
+      <div class="card-header">
+        <span>📋 SUBJECT & KUZHAL PARAMETERS</span>
+        <span class="badge-tag">STEP 1</span>
+      </div>
 
-  <!-- Floating Cartoon 4: Angry Fire CSS !important Bomb -->
-  <div class="float-cartoon c4" id="cartoon4">
-    <div class="cartoon-speech" id="speech4">🔥 "!IMPORTANT WON'T HELP!"</div>
-    <svg width="95" height="95" viewBox="0 0 100 100">
-      <!-- Flame body -->
-      <path d="M 50 10 C 70 30 90 50 80 75 C 70 95 30 95 20 75 C 10 50 30 30 50 10 Z" fill="#ff007f" stroke="#000" stroke-width="4"/>
-      <path d="M 50 30 C 62 42 72 58 65 72 C 58 84 42 84 35 72 C 30 58 38 42 50 30 Z" fill="#ffde59" stroke="#000" stroke-width="3"/>
-      <!-- Sunglasses on Flame -->
-      <polygon points="28,48 48,48 44,58 32,58" fill="#000"/>
-      <polygon points="52,48 72,48 68,58 56,58" fill="#000"/>
-      <line x1="48" y1="50" x2="52" y2="50" stroke="#000" stroke-width="3"/>
-      <!-- Smirk -->
-      <path d="M 40 68 Q 50 74 60 66" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
-    </svg>
-  </div>
+      <!-- 1. Dog Name -->
+      <div class="input-group">
+        <label for="dogName">Dog Name / പേര്:</label>
+        <input type="text" id="dogName" value="Appu" placeholder="Enter dog name...">
+      </div>
 
-  <!-- Central Question Card -->
-  <div class="home-card">
-    <h1 class="main-question">
-      Do you really think 12 years inside a PVC pipe will straighten a dog's tail?
-      <br>
-      <span class="ml-badge ml-text">"പട്ടിയുടെ വാല് 12 കൊല്ലം കുഴലിലിട്ടാൽ നിവരുമോ?"</span>
-    </h1>
+      <!-- 2. Dog Breed -->
+      <div class="input-group">
+        <label for="dogBreed">Dog Breed / വർഗ്ഗം:</label>
+        <select id="dogBreed">
+          <option value="naadan" data-k="1.2">Naadan Mix (k = 1.2)</option>
+          <option value="pug" data-k="3.8">Pug Double Spiral (k = 3.8)</option>
+          <option value="pomeranian" data-k="2.1">Pomeranian Fluff (k = 2.1)</option>
+          <option value="greyhound" data-k="0.0">Greyhound Straight (k = 0.0)</option>
+          <option value="custom" data-k="1.5">Custom / Unknown Breed</option>
+          <option value="beagle" data-k="4.2">Beagle (k=4.2)</option>
+          <option value="golden retriver" data-k="5.1">Golden Retriver (k=5.1)</option> 
+          <option value="German Shepherd" data-k="5.9">German Shepherd (k=5.9)</option>       
+        </select>
+      </div>
 
-    <a href="index.html" class="enter-btn">
-      🚀 ENTER THE LIVE LAB
-    </a>
+      <!-- 3. Breed Coefficient -->
+      <div class="input-group">
+        <label for="breedCoeff">
+          <span>Breed Coefficient ($k$):</span>
+          <span id="coeffValText" class="badge-tag" style="background:#ffde59;">1.20</span>
+        </label>
+        <input type="number" id="breedCoeff" value="1.20" step="0.1" min="0.1" max="5.0">
+      </div>
+
+      <!-- 4. Tail Angle -->
+      <div class="input-group">
+        <label for="tailAngle">
+          <span>Dog Tail Angle ($\theta$):</span>
+          <span id="angleValText" class="badge-tag" style="background:#00f0ff;">180°</span>
+        </label>
+        <input type="range" id="tailAngle" min="0" max="360" value="180">
+      </div>
+
+      <!-- SIDE CALCULATOR -->
+      <div class="calc-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.8rem; font-weight:900; color:#cbd5e1;">⚡ RANDOM HYDRAULIC PRESSURE CALCULATOR</span>
+          <button class="btn-calc" id="recalcBtn" style="padding:0.3rem 0.6rem; font-size:0.75rem;">🎲 RE-ROLL</button>
+        </div>
+
+        <div class="calc-val-display" id="calculatedPressureDisplay">
+          4,860 PSI
+        </div>
+
+        <div class="calc-formula" id="formulaDisplay">
+          P = Angle (180°) × k (1.2) × Random Factor (22.5)
+        </div>
+
+        <div style="font-size:0.75rem; font-weight:bold; color:#ffde59;" id="calcWarning">
+          🎯 EXACT RIGHT PRESSURE CALCULATED! Apply this pressure to straighten the tail.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: LIVE KUZHAL SIMULATOR -->
+    <div class="brutal-card">
+      <div class="card-header" style="background: var(--accent-pink); color: #fff;">
+        <span>🧪 LIVE KUZHAL SIMULATOR</span>
+        <span class="badge-tag" style="color:#000;">STEP 2</span>
+      </div>
+
+      <!-- Live Simulator Viewport -->
+      <div class="sim-viewport">
+        <canvas id="steamCanvas"></canvas>
+
+        <svg id="simSvg" width="100%" height="220" viewBox="0 0 500 220">
+          <defs>
+            <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#94a3b8"/>
+              <stop offset="30%" stop-color="#f1f5f9"/>
+              <stop offset="70%" stop-color="#64748b"/>
+              <stop offset="100%" stop-color="#334155"/>
+            </linearGradient>
+
+            <pattern id="hazardStripes" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 0 20 L 20 0 M -5 5 L 5 -5 M 15 25 L 25 15" stroke="#000" stroke-width="4"/>
+              <rect width="20" height="20" fill="#ffde59" style="mix-blend-mode: multiply;"/>
+            </pattern>
+          </defs>
+
+          <!-- Pipe Stand & Legs -->
+          <rect x="60" y="150" width="16" height="40" fill="#0f172a" stroke="#000" stroke-width="3"/>
+          <rect x="424" y="150" width="16" height="40" fill="#0f172a" stroke="#000" stroke-width="3"/>
+          <rect x="40" y="185" width="420" height="12" fill="#334155" stroke="#000" stroke-width="3"/>
+
+          <!-- Hazard Line -->
+          <rect x="110" y="25" width="280" height="10" fill="url(#hazardStripes)" stroke="#000" stroke-width="2"/>
+
+          <!-- PVC Pipe Body -->
+          <rect x="120" y="60" width="260" height="75" fill="url(#pipeGrad)" stroke="#000" stroke-width="4" rx="6"/>
+          <!-- Flanges -->
+          <rect x="108" y="52" width="20" height="91" fill="#475569" stroke="#000" stroke-width="3" rx="2"/>
+          <rect x="372" y="52" width="20" height="91" fill="#475569" stroke="#000" stroke-width="3" rx="2"/>
+
+          <!-- Pipe Text -->
+          <text x="250" y="103" font-size="12" font-weight="900" text-anchor="middle" fill="#000" opacity="0.3" letter-spacing="1">KUZHAL RIG v4.0</text>
+
+          <!-- Dynamic Tail Path -->
+          <path id="svgTailBg" d="M 40 100 L 460 100" fill="none" stroke="#78350f" stroke-width="20" stroke-linecap="round"/>
+          <path id="svgTailCore" d="M 40 100 L 460 100" fill="none" stroke="#d97706" stroke-width="12" stroke-linecap="round"/>
+          <circle id="tailTip" cx="460" cy="100" r="10" fill="#b45309" stroke="#000" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <!-- Live Readout Stats -->
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; text-align: center;">
+        <div style="background:#f1f5f9; border:2px solid #000; padding:0.4rem; border-radius:6px;">
+          <div style="font-size:0.65rem; font-weight:900;">SUBJECT</div>
+          <div id="readoutName" style="font-size:0.9rem; font-weight:900; color:#000;">APPU</div>
+        </div>
+        <div style="background:#f1f5f9; border:2px solid #000; padding:0.4rem; border-radius:6px;">
+          <div style="font-size:0.65rem; font-weight:900;">TAIL ANGLE</div>
+          <div id="readoutAngle" style="font-size:0.9rem; font-weight:900; color:#ff007f;">180°</div>
+        </div>
+        <div style="background:#f1f5f9; border:2px solid #000; padding:0.4rem; border-radius:6px;">
+          <div style="font-size:0.65rem; font-weight:900;">OUTCOME</div>
+          <div id="readoutOutcome" style="font-size:0.9rem; font-weight:900; color:#d97706;" class="ml-text">PENDING</div>
+        </div>
+      </div>
+
+      <!-- Sarcastic Result Banner -->
+      <div class="genz-banner" id="genzBanner">
+        💥 "the genzs proved the millenial dialogue wrong" 🚀
+      </div>
+
+      <!-- Main Action Buttons -->
+      <button class="btn-sim" id="applyPressureBtn">
+        💥 APPLY CALCULATED RIGHT PRESSURE & STRAIGHTEN TAIL
+      </button>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
   <script>
-    // Automatic Dialogue Arrays for each cartoon character
-    const dialogues = {
-      ammavan: [
-        "👴 \"12 കൊല്ലം കാത്തിരുന്നോ!\"",
-        "👴 \"നിവരില്ല എന്ന് പറഞ്ഞാൽ നിവരില്ല!\"",
-        "👴 \"ഓരോരോ സയൻസ് കണ്ടുപിടിത്തങ്ങൾ!\"",
-        "👴 \"Ammavan knows best!\""
-      ],
-      dog: [
-        "🐕 \"വാൽ നിവർത്താൻ നോക്കണ്ട!\"",
-        "🐕 \"Woof! 12 years of bending!\"",
-        "🐕 \"My tail = 100% curve!\"",
-        "🐕 \"Tail elasticity > 9000!\""
-      ],
-      pipe: [
-        "🧪 \"കുഴൽ പൊട്ടിത്തെറിക്കും!\"",
-        "🧪 \"Pressure too high!\"",
-        "🧪 \"I'm flexing as hard as I can!\"",
-        "🧪 \"12 years and still 180°!\""
-      ],
-      flame: [
-        "🔥 \"!IMPORTANT WON'T HELP!\"",
-        "🔥 \"CSS won't fix biology!\"",
-        "🔥 \"ഹൈഡ്രോളിക് പവർ വേണ്ടിവരും!\"",
-        "🔥 \"Error 404: Straight tail not found!\""
-      ]
-    };
+    // DOM Elements
+    const dogNameInput = document.getElementById('dogName');
+    const dogBreedSelect = document.getElementById('dogBreed');
+    const breedCoeffInput = document.getElementById('breedCoeff');
+    const coeffValText = document.getElementById('coeffValText');
+    const tailAngleInput = document.getElementById('tailAngle');
+    const angleValText = document.getElementById('angleValText');
 
-    let idx1 = 0, idx2 = 0, idx3 = 0, idx4 = 0;
+    const calculatedPressureDisplay = document.getElementById('calculatedPressureDisplay');
+    const formulaDisplay = document.getElementById('formulaDisplay');
+    const calcWarning = document.getElementById('calcWarning');
+    const recalcBtn = document.getElementById('recalcBtn');
 
-    // Helper function to animate speech bubble change
-    function updateSpeech(elementId, textArray, currentIndex) {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      
-      el.style.opacity = '0';
-      el.style.transform = 'scale(0.8)';
-      
-      setTimeout(() => {
-        el.textContent = textArray[currentIndex];
-        el.style.opacity = '1';
-        el.style.transform = 'scale(1)';
-      }, 200);
+    const svgTailBg = document.getElementById('svgTailBg');
+    const svgTailCore = document.getElementById('svgTailCore');
+    const tailTip = document.getElementById('tailTip');
+
+    const readoutName = document.getElementById('readoutName');
+    const readoutAngle = document.getElementById('readoutAngle');
+    const readoutOutcome = document.getElementById('readoutOutcome');
+    const genzBanner = document.getElementById('genzBanner');
+    const applyPressureBtn = document.getElementById('applyPressureBtn');
+
+    let currentCalculatedPSI = 0;
+    let currentRandomFactor = 22.5;
+
+    // Canvas Steam FX
+    const canvas = document.getElementById('steamCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
     }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    // Dialogue Rotation Interval (Every 3.5 seconds)
-    setInterval(() => {
-      idx1 = (idx1 + 1) % dialogues.ammavan.length;
-      idx2 = (idx2 + 1) % dialogues.dog.length;
-      idx3 = (idx3 + 1) % dialogues.pipe.length;
-      idx4 = (idx4 + 1) % dialogues.flame.length;
-
-      updateSpeech('speech1', dialogues.ammavan, idx1);
-      setTimeout(() => updateSpeech('speech2', dialogues.dog, idx2), 400);
-      setTimeout(() => updateSpeech('speech3', dialogues.pipe, idx3), 800);
-      setTimeout(() => updateSpeech('speech4', dialogues.flame, idx4), 1200);
-    }, 3500);
-
-    // Draggable functionality (Supports Touch & Mouse)
-    function enableDragging(el) {
-      let posX = 0, posY = 0, initialX = 0, initialY = 0;
-
-      el.addEventListener('mousedown', dragStart);
-      el.addEventListener('touchstart', dragStart, { passive: false });
-
-      function dragStart(e) {
-        // Pause CSS float keyframe while dragging
-        el.style.animation = 'none';
-
-        if (e.type === 'touchstart') {
-          initialX = e.touches[0].clientX - posX;
-          initialY = e.touches[0].clientY - posY;
-          document.addEventListener('touchmove', dragging, { passive: false });
-          document.addEventListener('touchend', dragEnd);
-        } else {
-          initialX = e.clientX - posX;
-          initialY = e.clientY - posY;
-          document.addEventListener('mousemove', dragging);
-          document.addEventListener('mouseup', dragEnd);
-        }
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 4;
+        this.vy = -Math.random() * 4 - 2;
+        this.size = Math.random() * 12 + 4;
+        this.alpha = 0.9;
       }
-
-      function dragging(e) {
-        e.preventDefault();
-        const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-        const currentY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-
-        posX = currentX - initialX;
-        posY = currentY - initialY;
-
-        el.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.size += 0.3;
+        this.alpha -= 0.02;
       }
-
-      function dragEnd() {
-        document.removeEventListener('mousemove', dragging);
-        document.removeEventListener('mouseup', dragEnd);
-        document.removeEventListener('touchmove', dragging);
-        document.removeEventListener('touchend', dragEnd);
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.fillStyle = '#00f0ff';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
       }
     }
 
-    // Attach dragging to all 4 cartoon elements
-    document.querySelectorAll('.float-cartoon').forEach(el => {
-      enableDragging(el);
+    function emitSteamBurst() {
+      const midX = canvas.width / 2;
+      const midY = canvas.height / 2;
+      for (let i = 0; i < 40; i++) {
+        particles.push(new Particle(midX + (Math.random() - 0.5) * 120, midY));
+      }
+    }
+
+    function animateSteam() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].alpha <= 0) particles.splice(i, 1);
+      }
+      requestAnimationFrame(animateSteam);
+    }
+    animateSteam();
+
+    // Side Calculator Logic
+    function calculatePressure() {
+      const angle = parseInt(tailAngleInput.value);
+      const k = parseFloat(breedCoeffInput.value) || 1.0;
+
+      if (angle === 0 || k === 0) {
+        currentCalculatedPSI = 0;
+        calculatedPressureDisplay.textContent = "0 PSI";
+        formulaDisplay.textContent = "P = 0 (Tail is already naturally straight!)";
+        calcWarning.textContent = "✅ GREYHOUND EXCEPTION: No pressure needed!";
+        return;
+      }
+
+      currentCalculatedPSI = Math.round(angle * k * currentRandomFactor);
+      calculatedPressureDisplay.textContent = currentCalculatedPSI.toLocaleString() + " PSI";
+      formulaDisplay.textContent = `P = Angle (${angle}°) × k (${k.toFixed(1)}) × Random Factor (${currentRandomFactor.toFixed(1)})`;
+      calcWarning.textContent = "🎯 EXACT RIGHT PRESSURE CALCULATED! Apply this pressure to straighten the tail.";
+    }
+
+    // Render SVG Tail Curve inside Simulator
+    function renderTailPath(angle) {
+      const startX = 40;
+      const startY = 100;
+
+      if (angle <= 0) {
+        const straightPath = `M ${startX} 100 L 460 100`;
+        svgTailBg.setAttribute('d', straightPath);
+        svgTailCore.setAttribute('d', straightPath);
+        tailTip.setAttribute('cx', 460);
+        tailTip.setAttribute('cy', 100);
+        return;
+      }
+
+      const rad = (angle * Math.PI) / 180;
+      const curlRadius = 20 + (angle / 360) * 45;
+      const endX = 350 + Math.cos(rad) * curlRadius;
+      const endY = 100 - Math.sin(rad) * curlRadius;
+
+      const c1X = 150;
+      const c1Y = 100 - (angle / 360) * 50;
+      const c2X = 280;
+      const c2Y = 100 + Math.sin(rad) * 70;
+
+      const pathData = `M ${startX} 100 C ${c1X} ${c1Y}, ${c2X} ${c2Y}, ${endX} ${endY}`;
+
+      svgTailBg.setAttribute('d', pathData);
+      svgTailCore.setAttribute('d', pathData);
+      tailTip.setAttribute('cx', endX);
+      tailTip.setAttribute('cy', endY);
+    }
+
+    // Event Handlers
+    dogNameInput.addEventListener('input', (e) => {
+      readoutName.textContent = e.target.value.toUpperCase() || 'APPU';
     });
+
+    dogBreedSelect.addEventListener('change', (e) => {
+      const selectedOption = e.target.options[e.target.selectedIndex];
+      const defaultK = parseFloat(selectedOption.getAttribute('data-k'));
+      breedCoeffInput.value = defaultK.toFixed(1);
+      coeffValText.textContent = defaultK.toFixed(1);
+
+      if (e.target.value === 'greyhound') {
+        tailAngleInput.value = 0;
+      } else if (e.target.value === 'pug') {
+        tailAngleInput.value = 360;
+      } else if (tailAngleInput.value == 0) {
+        tailAngleInput.value = 180;
+      }
+
+      tailAngleInput.dispatchEvent(new Event('input'));
+    });
+
+    breedCoeffInput.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value) || 0;
+      coeffValText.textContent = val.toFixed(1);
+      calculatePressure();
+    });
+
+    tailAngleInput.addEventListener('input', (e) => {
+      const angle = parseInt(e.target.value);
+      angleValText.textContent = angle + '°';
+      readoutAngle.textContent = angle + '°';
+      genzBanner.style.display = 'none';
+
+      if (angle === 0) {
+        readoutOutcome.textContent = 'STRAIGHT';
+        readoutOutcome.style.color = '#22c55e';
+      } else {
+        readoutOutcome.textContent = 'CURLED';
+        readoutOutcome.style.color = '#d97706';
+      }
+
+      renderTailPath(angle);
+      calculatePressure();
+    });
+
+    recalcBtn.addEventListener('click', () => {
+      currentRandomFactor = 15 + Math.random() * 30;
+      calculatePressure();
+      if (typeof playSlurpSound === 'function') playSlurpSound();
+    });
+
+    // Apply Exact Calculated Right Pressure -> Straightens Tail!
+    applyPressureBtn.addEventListener('click', () => {
+      const name = dogNameInput.value || 'Appu';
+      const initialAngle = parseInt(tailAngleInput.value);
+
+      emitSteamBurst();
+      if (typeof playPipeClang === 'function') playPipeClang();
+
+      applyPressureBtn.disabled = true;
+
+      // Animate Tail Straightening smoothly
+      let currentStep = 0;
+      const totalSteps = 15;
+      const animInterval = setInterval(() => {
+        currentStep++;
+        const interpolatedAngle = Math.max(0, initialAngle - (initialAngle / totalSteps) * currentStep);
+        renderTailPath(interpolatedAngle);
+
+        if (currentStep >= totalSteps) {
+          clearInterval(animInterval);
+          renderTailPath(0); // Fully Straightened!
+          
+          if (typeof playWinSound === 'function') playWinSound();
+          emitSteamBurst();
+
+          // Update UI Status
+          readoutAngle.textContent = '0°';
+          readoutOutcome.textContent = '100% STRAIGHT! 🎉';
+          readoutOutcome.style.color = '#22c55e';
+
+          // Display Sarcastic Gen Z Statement Banner
+          genzBanner.style.display = 'block';
+
+          // Alert Output
+          alert(`🎉 KUZHAL LAB VICTORY FOR ${name.toUpperCase()}!\n\nApplied ${currentCalculatedPSI.toLocaleString()} PSI of right calculated pressure!\n\n"the genzs proved the millenial dialogue wrong"`);
+
+          applyPressureBtn.disabled = false;
+        }
+      }, 35);
+    });
+
+    // Initial setup
+    renderTailPath(180);
+    calculatePressure();
   </script>
 </body>
 </html>
