@@ -14,21 +14,24 @@
 - Member 1: SANIYA GEORGE - NSS COLLEGE OF ENGINEERINNG,PALAKKAD
 
 ### Project Description
-[2-3 lines about what your project does]
+VAALU-X applies rigorous engineering modeling — force, thermal analysis, and a control-systems layer — to the age-old challenge of canine tail curvature. Users select a breed and environmental parameters to receive an AI-optimized straightening protocol, benchmarked live against the traditional pipe method.
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving??]
+There exists a well-known Malayalam proverb: "പട്ടിയുടെ വാല് പന്ത്രണ്ട് കൊല്ലം കുഴലിലിട്ടാലും വളഞ്ഞുതന്നെയിരിക്കും" — even after 12 years in a pipe, a dog's tail will not straighten. For generations, this has been accepted as folk wisdom. Nobody has bothered to verify it with sensors, an AI model, or a PID controller. We considered this a gap in the literature.
 
 ### The Solution (that nobody asked for)
-[How are you solving it?? Keep it fun!]
+VAALU-X computes a proprietary Tail Curvature Index (TCI) and a fictional Tail Relaxation Constant, then runs the Traditional Method and an AI-optimized Engineering Method side-by-side on live sliders (pressure, temperature, pipe diameter). A neural-sounding model, TailCurvNet™, predicts optimal force, temperature, and duration, complete with a suspiciously high confidence score. The results are plotted on a real-time graph, because no ridiculous claim is complete without a chart to back it up.
+
+Spoiler: the proverb wins. Every time. We built an entire simulation engine to arrive at the same conclusion your grandmother already knew.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+
+Languages: HTML, CSS, JavaScript
+Frameworks: None — vanilla stack, deliberately overengineered
+Libraries: Native SVG rendering for live graphs and tail animation
+Tools: VS Code, Git, unreasonable amounts of confidence
 
 For Hardware:
 - [List main components]
@@ -48,7 +51,6 @@ For Software:
 
 # Screenshots (Add at least 3)
 ![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
 
 ![Screenshot2](Add screenshot 2 here with proper name)
 *Add caption explaining what this shows*
