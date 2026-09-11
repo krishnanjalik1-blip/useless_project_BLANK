@@ -3,12 +3,251 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Department of Tail Affairs | Portal</title>
+  <title>Department of Tail Affairs | Kuzhal Lab</title>
   <link rel="stylesheet" href="style.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: var(--bg-color, #f4efe6);
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+    }
+
+    .ml-text {
+      font-family: 'Baloo Chettan 2', cursive, sans-serif;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 900px) {
+      .app-grid {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+
+    .brutal-card {
+      background: #ffffff;
+      border: 4px solid #000;
+      box-shadow: 8px 8px 0px #000;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .card-header {
+      background: var(--accent-yellow, #ffde59);
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 0.6rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 6px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .input-group label {
+      font-weight: 900;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .input-group input[type="text"],
+    .input-group input[type="number"],
+    .input-group select {
+      background: #f8fafc;
+      border: 3px solid #000;
+      padding: 0.7rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: inherit;
+      border-radius: 6px;
+      outline: none;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .input-group input[type="range"] {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border: 2px solid #000;
+      outline: none;
+      border-radius: 0;
+    }
+
+    .input-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      background: var(--accent-pink, #ff007f);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0px #000;
+      cursor: pointer;
+    }
+
+    /* Calculator Box Styling */
+    .calc-box {
+      background: #0f172a;
+      color: #fff;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .calc-val-display {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent-cyan, #00f0ff);
+      text-shadow: 2px 2px 0px #000;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .calc-formula {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-family: monospace;
+      background: rgba(255,255,255,0.05);
+      padding: 0.4rem 0.6rem;
+      border: 1px dashed #475569;
+      border-radius: 4px;
+    }
+
+    /* Action Buttons */
+    .btn-calc {
+      background: var(--accent-cyan, #00f0ff);
+      color: #000;
+      font-size: 1rem;
+      padding: 0.8rem;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: all 0.1s;
+    }
+
+    .btn-calc:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000;
+      background: var(--accent-yellow, #ffde59);
+    }
+
+    .btn-calc:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .btn-sim {
+      background: var(--accent-pink, #ff007f);
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border: 4px solid #000;
+      box-shadow: 5px 5px 0px #000;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 8px;
+      width: 100%;
+      transition: all 0.1s;
+    }
+
+    .btn-sim:hover {
+      background: var(--accent-green, #22c55e);
+      color: #000;
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0px #000;
+    }
+
+    /* Simulator Chamber Frame */
+    .sim-viewport {
+      background: #1e293b;
+      border: 4px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #steamCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .badge-tag {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 900;
+      box-shadow: 2px 2px 0px #000;
+      border-radius: 4px;
+    }
+
+    /* Sarcastic Gen Z Banner */
+    .genz-banner {
+      background: #ff007f;
+      color: #fff;
+      border: 3px solid #000;
+      box-shadow: 3px 3px 0px #000;
+      padding: 0.8rem;
+      font-weight: 900;
+      font-size: 0.95rem;
+      text-align: center;
+      text-transform: uppercase;
+      border-radius: 6px;
+      display: none;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="header-container">
+  <!-- Navigation Bar -->
+  <div class="header-container" style="margin-bottom: 1.5rem;">
     <nav>
       <a href="index.html" class="brand">🐕 KUZHAL LAB v4.0</a>
       <div class="nav-links">
@@ -20,125 +259,386 @@
     </nav>
   </div>
 
-  <div class="main-wrapper">
-    
-    <!-- Hero / Stage Card -->
-    <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span class="card-title">LIVE KUZHAL SIMULATOR</span>
-        <span id="statusBadge" style="background:#ffde59; border:2px solid #000; padding:0.2rem 0.6rem; font-weight:900; font-size:0.75rem;">CURLED IN PIPE</span>
+  <div class="app-grid">
+
+    <!-- LEFT COLUMN: INPUTS & CALCULATOR -->
+    <div class="brutal-card">
+      <div class="card-header">
+        <span>📋 SUBJECT & KUZHAL PARAMETERS</span>
+        <span class="badge-tag">STEP 1</span>
       </div>
 
-      <div class="stage-box">
-        <svg id="stageSvg" width="100%" height="180" viewBox="0 0 500 180">
-          <!-- PVC Pipe -->
-          <rect x="150" y="55" width="200" height="70" fill="#cbd5e1" stroke="#000" stroke-width="4" rx="6"/>
-          <rect x="140" y="50" width="18" height="80" fill="#64748b" stroke="#000" stroke-width="3"/>
-          <rect x="342" y="50" width="18" height="80" fill="#64748b" stroke="#000" stroke-width="3"/>
-          <text x="250" y="95" font-size="11" font-weight="900" text-anchor="middle" fill="#000" opacity="0.6">KUZHAL-3000</text>
-
-          <!-- Animated Tail Path -->
-          <path id="svgTail" d="M 60 90 C 120 90, 180 75, 250 90 C 310 105, 380 40, 420 40 Q 440 20 410 20" fill="none" stroke="#d97706" stroke-width="14" stroke-linecap="round"/>
-        </svg>
+      <!-- 1. Dog Name -->
+      <div class="input-group">
+        <label for="dogName">Dog Name / പേര്:</label>
+        <input type="text" id="dogName" value="Appu" placeholder="Enter dog name...">
       </div>
 
-      <!-- Quick Metrics -->
-      <div class="badge-grid">
-        <div class="metric-card">
-          <div style="font-size:0.75rem; font-weight:900;">CURL ANGLE</div>
-          <div class="metric-val" id="angleVal">180°</div>
+      <!-- 2. Dog Breed -->
+      <div class="input-group">
+        <label for="dogBreed">Dog Breed / വർഗ്ഗം:</label>
+        <select id="dogBreed">
+          <option value="naadan" data-k="1.2">Naadan Mix (k = 1.2)</option>
+          <option value="pug" data-k="3.8">Pug Double Spiral (k = 3.8)</option>
+          <option value="pomeranian" data-k="2.1">Pomeranian Fluff (k = 2.1)</option>
+          <option value="greyhound" data-k="0.0">Greyhound Straight (k = 0.0)</option>
+          <option value="custom" data-k="1.5">Custom / Unknown Breed</option>
+          <option value="beagle" data-k="4.2">Beagle (k=4.2)</option>
+          <option value="golden retriver" data-k="5.1">Golden Retriver (k=5.1)</option> 
+          <option value="German Shepherd" data-k="5.9">German Shepherd (k=5.9)</option>       
+        </select>
+      </div>
+
+      <!-- 3. Breed Coefficient -->
+      <div class="input-group">
+        <label for="breedCoeff">
+          <span>Breed Coefficient ($k$):</span>
+          <span id="coeffValText" class="badge-tag" style="background:#ffde59;">1.20</span>
+        </label>
+        <input type="number" id="breedCoeff" value="1.20" step="0.1" min="0.1" max="5.0">
+      </div>
+
+      <!-- 4. Tail Angle -->
+      <div class="input-group">
+        <label for="tailAngle">
+          <span>Dog Tail Angle ($\theta$):</span>
+          <span id="angleValText" class="badge-tag" style="background:#00f0ff;">180°</span>
+        </label>
+        <input type="range" id="tailAngle" min="0" max="360" value="180">
+      </div>
+
+      <!-- SIDE CALCULATOR -->
+      <div class="calc-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.8rem; font-weight:900; color:#cbd5e1;">⚡ RANDOM HYDRAULIC PRESSURE CALCULATOR</span>
+          <button class="btn-calc" id="recalcBtn" style="padding:0.3rem 0.6rem; font-size:0.75rem;">🎲 RE-ROLL</button>
         </div>
-        <div class="metric-card">
-          <div style="font-size:0.75rem; font-weight:900;">PRESSURE</div>
-          <div class="metric-val" id="pressureVal">50 PSI</div>
+
+        <div class="calc-val-display" id="calculatedPressureDisplay">
+          4,860 PSI
         </div>
-        <div class="metric-card">
-          <div style="font-size:0.75rem; font-weight:900;">OUTCOME</div>
-          <div class="metric-val" id="outcomeVal" style="font-size:1rem; color:#000;">NIVARILLA</div>
+
+        <div class="calc-formula" id="formulaDisplay">
+          P = Angle (180°) × k (1.2) × Random Factor (22.5)
+        </div>
+
+        <div style="font-size:0.75rem; font-weight:bold; color:#ffde59;" id="calcWarning">
+          🎯 EXACT RIGHT PRESSURE CALCULATED! Apply this pressure to straighten the tail.
         </div>
       </div>
     </div>
 
-    <!-- Quick Interactive Controls Card -->
-    <div class="card">
-      <span class="card-title">MECHANICS CONTROLS</span>
-
-      <div class="control-box">
-        <label>Canine Breed: <span id="breedLabel">Naadan Mix</span></label>
-        <select id="breedSelect">
-          <option value="naadan">Naadan Mix (k=1.2)</option>
-          <option value="pug">Pug Double Spiral (k=3.5)</option>
-          <option value="pomeranian">Pomeranian Fluff (k=1.8)</option>
-          <option value="greyhound">Greyhound Loophole (Already Straight)</option>
-        </select>
+    <!-- RIGHT COLUMN: LIVE KUZHAL SIMULATOR -->
+    <div class="brutal-card">
+      <div class="card-header" style="background: var(--accent-pink); color: #fff;">
+        <span>🧪 LIVE KUZHAL SIMULATOR</span>
+        <span class="badge-tag" style="color:#000;">STEP 2</span>
       </div>
 
-      <div class="control-box">
-        <label>Steam Pressure: <span id="pressureText">50 PSI</span></label>
-        <input type="range" id="pressureInput" min="10" max="500" value="50">
+      <!-- Live Simulator Viewport -->
+      <div class="sim-viewport">
+        <canvas id="steamCanvas"></canvas>
+
+        <svg id="simSvg" width="100%" height="220" viewBox="0 0 500 220">
+          <defs>
+            <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#94a3b8"/>
+              <stop offset="30%" stop-color="#f1f5f9"/>
+              <stop offset="70%" stop-color="#64748b"/>
+              <stop offset="100%" stop-color="#334155"/>
+            </linearGradient>
+
+            <pattern id="hazardStripes" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 0 20 L 20 0 M -5 5 L 5 -5 M 15 25 L 25 15" stroke="#000" stroke-width="4"/>
+              <rect width="20" height="20" fill="#ffde59" style="mix-blend-mode: multiply;"/>
+            </pattern>
+          </defs>
+
+          <!-- Pipe Stand & Legs -->
+          <rect x="60" y="150" width="16" height="40" fill="#0f172a" stroke="#000" stroke-width="3"/>
+          <rect x="424" y="150" width="16" height="40" fill="#0f172a" stroke="#000" stroke-width="3"/>
+          <rect x="40" y="185" width="420" height="12" fill="#334155" stroke="#000" stroke-width="3"/>
+
+          <!-- Hazard Line -->
+          <rect x="110" y="25" width="280" height="10" fill="url(#hazardStripes)" stroke="#000" stroke-width="2"/>
+
+          <!-- PVC Pipe Body -->
+          <rect x="120" y="60" width="260" height="75" fill="url(#pipeGrad)" stroke="#000" stroke-width="4" rx="6"/>
+          <!-- Flanges -->
+          <rect x="108" y="52" width="20" height="91" fill="#475569" stroke="#000" stroke-width="3" rx="2"/>
+          <rect x="372" y="52" width="20" height="91" fill="#475569" stroke="#000" stroke-width="3" rx="2"/>
+
+          <!-- Pipe Text -->
+          <text x="250" y="103" font-size="12" font-weight="900" text-anchor="middle" fill="#000" opacity="0.3" letter-spacing="1">KUZHAL RIG v4.0</text>
+
+          <!-- Dynamic Tail Path -->
+          <path id="svgTailBg" d="M 40 100 L 460 100" fill="none" stroke="#78350f" stroke-width="20" stroke-linecap="round"/>
+          <path id="svgTailCore" d="M 40 100 L 460 100" fill="none" stroke="#d97706" stroke-width="12" stroke-linecap="round"/>
+          <circle id="tailTip" cx="460" cy="100" r="10" fill="#b45309" stroke="#000" stroke-width="2"/>
+        </svg>
       </div>
 
-      <div style="display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:0.5rem;">
-        <button class="btn btn-green" id="runCalcBtn" style="flex:1;">🚀 RUN STRAIGHTENING ALGORITHM</button>
-        <button class="btn btn-pink" id="forceCssBtn">🔥 FORCE CSS !important</button>
+      <!-- Live Readout Stats -->
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; text-align: center;">
+        <div style="background:#f1f5f9; border:2px solid #000; padding:0.4rem; border-radius:6px;">
+          <div style="font-size:0.65rem; font-weight:900;">SUBJECT</div>
+          <div id="readoutName" style="font-size:0.9rem; font-weight:900; color:#000;">APPU</div>
+        </div>
+        <div style="background:#f1f5f9; border:2px solid #000; padding:0.4rem; border-radius:6px;">
+          <div style="font-size:0.65rem; font-weight:900;">TAIL ANGLE</div>
+          <div id="readoutAngle" style="font-size:0.9rem; font-weight:900; color:#ff007f;">180°</div>
+        </div>
+        <div style="background:#f1f5f9; border:2px solid #000; padding:0.4rem; border-radius:6px;">
+          <div style="font-size:0.65rem; font-weight:900;">OUTCOME</div>
+          <div id="readoutOutcome" style="font-size:0.9rem; font-weight:900; color:#d97706;" class="ml-text">PENDING</div>
+        </div>
       </div>
+
+      <!-- Sarcastic Result Banner -->
+      <div class="genz-banner" id="genzBanner">
+        💥 "the genzs proved the millenial dialogue wrong" 🚀
+      </div>
+
+      <!-- Main Action Buttons -->
+      <button class="btn-sim" id="applyPressureBtn">
+        💥 APPLY CALCULATED RIGHT PRESSURE & STRAIGHTEN TAIL
+      </button>
     </div>
 
   </div>
 
   <script src="script.js"></script>
   <script>
-    const svgTail = document.getElementById('svgTail');
-    const pressureInput = document.getElementById('pressureInput');
-    const pressureText = document.getElementById('pressureText');
-    const pressureVal = document.getElementById('pressureVal');
-    const statusBadge = document.getElementById('statusBadge');
-    const outcomeVal = document.getElementById('outcomeVal');
+    // DOM Elements
+    const dogNameInput = document.getElementById('dogName');
+    const dogBreedSelect = document.getElementById('dogBreed');
+    const breedCoeffInput = document.getElementById('breedCoeff');
+    const coeffValText = document.getElementById('coeffValText');
+    const tailAngleInput = document.getElementById('tailAngle');
+    const angleValText = document.getElementById('angleValText');
 
-    pressureInput.addEventListener('input', (e) => {
-      const p = e.target.value;
-      pressureText.textContent = p + ' PSI';
-      pressureVal.textContent = p + ' PSI';
-      resetTail();
+    const calculatedPressureDisplay = document.getElementById('calculatedPressureDisplay');
+    const formulaDisplay = document.getElementById('formulaDisplay');
+    const calcWarning = document.getElementById('calcWarning');
+    const recalcBtn = document.getElementById('recalcBtn');
+
+    const svgTailBg = document.getElementById('svgTailBg');
+    const svgTailCore = document.getElementById('svgTailCore');
+    const tailTip = document.getElementById('tailTip');
+
+    const readoutName = document.getElementById('readoutName');
+    const readoutAngle = document.getElementById('readoutAngle');
+    const readoutOutcome = document.getElementById('readoutOutcome');
+    const genzBanner = document.getElementById('genzBanner');
+    const applyPressureBtn = document.getElementById('applyPressureBtn');
+
+    let currentCalculatedPSI = 0;
+    let currentRandomFactor = 22.5;
+
+    // Canvas Steam FX
+    const canvas = document.getElementById('steamCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 4;
+        this.vy = -Math.random() * 4 - 2;
+        this.size = Math.random() * 12 + 4;
+        this.alpha = 0.9;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.size += 0.3;
+        this.alpha -= 0.02;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.fillStyle = '#00f0ff';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function emitSteamBurst() {
+      const midX = canvas.width / 2;
+      const midY = canvas.height / 2;
+      for (let i = 0; i < 40; i++) {
+        particles.push(new Particle(midX + (Math.random() - 0.5) * 120, midY));
+      }
+    }
+
+    function animateSteam() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].alpha <= 0) particles.splice(i, 1);
+      }
+      requestAnimationFrame(animateSteam);
+    }
+    animateSteam();
+
+    // Side Calculator Logic
+    function calculatePressure() {
+      const angle = parseInt(tailAngleInput.value);
+      const k = parseFloat(breedCoeffInput.value) || 1.0;
+
+      if (angle === 0 || k === 0) {
+        currentCalculatedPSI = 0;
+        calculatedPressureDisplay.textContent = "0 PSI";
+        formulaDisplay.textContent = "P = 0 (Tail is already naturally straight!)";
+        calcWarning.textContent = "✅ GREYHOUND EXCEPTION: No pressure needed!";
+        return;
+      }
+
+      currentCalculatedPSI = Math.round(angle * k * currentRandomFactor);
+      calculatedPressureDisplay.textContent = currentCalculatedPSI.toLocaleString() + " PSI";
+      formulaDisplay.textContent = `P = Angle (${angle}°) × k (${k.toFixed(1)}) × Random Factor (${currentRandomFactor.toFixed(1)})`;
+      calcWarning.textContent = "🎯 EXACT RIGHT PRESSURE CALCULATED! Apply this pressure to straighten the tail.";
+    }
+
+    // Render SVG Tail Curve inside Simulator
+    function renderTailPath(angle) {
+      const startX = 40;
+      const startY = 100;
+
+      if (angle <= 0) {
+        const straightPath = `M ${startX} 100 L 460 100`;
+        svgTailBg.setAttribute('d', straightPath);
+        svgTailCore.setAttribute('d', straightPath);
+        tailTip.setAttribute('cx', 460);
+        tailTip.setAttribute('cy', 100);
+        return;
+      }
+
+      const rad = (angle * Math.PI) / 180;
+      const curlRadius = 20 + (angle / 360) * 45;
+      const endX = 350 + Math.cos(rad) * curlRadius;
+      const endY = 100 - Math.sin(rad) * curlRadius;
+
+      const c1X = 150;
+      const c1Y = 100 - (angle / 360) * 50;
+      const c2X = 280;
+      const c2Y = 100 + Math.sin(rad) * 70;
+
+      const pathData = `M ${startX} 100 C ${c1X} ${c1Y}, ${c2X} ${c2Y}, ${endX} ${endY}`;
+
+      svgTailBg.setAttribute('d', pathData);
+      svgTailCore.setAttribute('d', pathData);
+      tailTip.setAttribute('cx', endX);
+      tailTip.setAttribute('cy', endY);
+    }
+
+    // Event Handlers
+    dogNameInput.addEventListener('input', (e) => {
+      readoutName.textContent = e.target.value.toUpperCase() || 'APPU';
     });
 
-    document.getElementById('runCalcBtn').addEventListener('click', () => {
-      runSarcasticModal(() => {
-        const breed = document.getElementById('breedSelect').value;
-        const pressure = parseInt(pressureInput.value);
+    dogBreedSelect.addEventListener('change', (e) => {
+      const selectedOption = e.target.options[e.target.selectedIndex];
+      const defaultK = parseFloat(selectedOption.getAttribute('data-k'));
+      breedCoeffInput.value = defaultK.toFixed(1);
+      coeffValText.textContent = defaultK.toFixed(1);
 
-        if (pressure >= 450 || breed === 'greyhound') {
-          straightenTail();
-        } else {
-          resetTail();
-          alert("👴 AMMAVAN WINS! 50 PSI is too weak. Increase pressure to 500 PSI!");
+      if (e.target.value === 'greyhound') {
+        tailAngleInput.value = 0;
+      } else if (e.target.value === 'pug') {
+        tailAngleInput.value = 360;
+      } else if (tailAngleInput.value == 0) {
+        tailAngleInput.value = 180;
+      }
+
+      tailAngleInput.dispatchEvent(new Event('input'));
+    });
+
+    breedCoeffInput.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value) || 0;
+      coeffValText.textContent = val.toFixed(1);
+      calculatePressure();
+    });
+
+    tailAngleInput.addEventListener('input', (e) => {
+      const angle = parseInt(e.target.value);
+      angleValText.textContent = angle + '°';
+      readoutAngle.textContent = angle + '°';
+      genzBanner.style.display = 'none';
+
+      if (angle === 0) {
+        readoutOutcome.textContent = 'STRAIGHT';
+        readoutOutcome.style.color = '#22c55e';
+      } else {
+        readoutOutcome.textContent = 'CURLED';
+        readoutOutcome.style.color = '#d97706';
+      }
+
+      renderTailPath(angle);
+      calculatePressure();
+    });
+
+    recalcBtn.addEventListener('click', () => {
+      currentRandomFactor = 15 + Math.random() * 30;
+      calculatePressure();
+      if (typeof playSlurpSound === 'function') playSlurpSound();
+    });
+
+    // Apply Exact Calculated Right Pressure -> Straightens Tail!
+    applyPressureBtn.addEventListener('click', () => {
+      const name = dogNameInput.value || 'Appu';
+      const initialAngle = parseInt(tailAngleInput.value);
+
+      emitSteamBurst();
+      if (typeof playPipeClang === 'function') playPipeClang();
+
+      applyPressureBtn.disabled = true;
+
+      // Animate Tail Straightening smoothly
+      let currentStep = 0;
+      const totalSteps = 15;
+      const animInterval = setInterval(() => {
+        currentStep++;
+        const interpolatedAngle = Math.max(0, initialAngle - (initialAngle / totalSteps) * currentStep);
+        renderTailPath(interpolatedAngle);
+
+        if (currentStep >= totalSteps) {
+          clearInterval(animInterval);
+          renderTailPath(0); // Fully Straightened!
+          
+          if (typeof playWinSound === 'function') playWinSound();
+          emitSteamBurst();
+
+          // Update UI Status
+          readoutAngle.textContent = '0°';
+          readoutOutcome.textContent = '100% STRAIGHT! 🎉';
+          readoutOutcome.style.color = '#22c55e';
+
+          // Display Sarcastic Gen Z Statement Banner
+          genzBanner.style.display = 'block';
+
+          // Alert Output
+          alert(`🎉 KUZHAL LAB VICTORY FOR ${name.toUpperCase()}!\n\nApplied ${currentCalculatedPSI.toLocaleString()} PSI of right calculated pressure!\n\n"the genzs proved the millenial dialogue wrong"`);
+
+          applyPressureBtn.disabled = false;
         }
-      });
+      }, 35);
     });
 
-    document.getElementById('forceCssBtn').addEventListener('click', () => {
-      playWinSound();
-      straightenTail();
-      outcomeVal.textContent = "CSS OVERRIDE!";
-      outcomeVal.style.color = "#ff007f";
-    });
-
-    function straightenTail() {
-      svgTail.setAttribute('d', 'M 60 90 L 440 90');
-      statusBadge.textContent = '100% STRAIGHTENED';
-      statusBadge.style.background = '#22c55e';
-      outcomeVal.textContent = "STRAIGHT!";
-      outcomeVal.style.color = "#22c55e";
-      playWinSound();
-    }
-
-    function resetTail() {
-      svgTail.setAttribute('d', 'M 60 90 C 120 90, 180 75, 250 90 C 310 105, 380 40, 420 40 Q 440 20 410 20');
-      statusBadge.textContent = 'CURLED IN PIPE';
-      statusBadge.style.background = '#ffde59';
-      outcomeVal.textContent = "NIVARILLA";
-      outcomeVal.style.color = "#000";
-    }
+    // Initial setup
+    renderTailPath(180);
+    calculatePressure();
   </script>
 </body>
 </html>

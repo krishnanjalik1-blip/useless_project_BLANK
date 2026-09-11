@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department of Tail Affairs | Home</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Cool Malayalam & Brutalist Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&family=Space+Grotesk:wght@800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg-color, #f4efe6);
+    }
+
+    /* Cool Malayalam Font Class */
+    .ml-text {
+      font-family: 'Baloo Chettan 2', cursive, sans-serif;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    /* Central Question Card */
+    .home-card {
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+      padding: 3.5rem 2rem;
+      z-index: 10;
+      position: relative;
+      background: #ffffff;
+      border: 5px solid #000;
+      box-shadow: 12px 12px 0px #000;
+      border-radius: 12px;
+    }
+
+    .main-question {
+      font-size: clamp(1.4rem, 4.2vw, 2.3rem);
+      font-weight: 900;
+      line-height: 1.35;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: 2.2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .main-question .ml-badge {
+      background: var(--accent-yellow, #ffde59);
+      padding: 0.4rem 1rem;
+      border: 4px solid #000;
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: clamp(1.3rem, 4vw, 2.2rem);
+      box-shadow: 4px 4px 0px #000;
+      text-transform: none;
+      border-radius: 8px;
+    }
+
+    /* Enter Button */
+    .enter-btn {
+      font-size: 1.25rem;
+      padding: 1.2rem 2.5rem;
+      background: var(--accent-pink, #ff007f);
+      color: #fff;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0px #000;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 10px;
+    }
+
+    .enter-btn:hover {
+      transform: translate(-4px, -4px) scale(1.02);
+      box-shadow: 10px 10px 0px #000;
+      background: var(--accent-cyan, #00f0ff);
+      color: #000;
+    }
+
+    /* Floating Draggable Cartoon Character Containers */
+    .float-cartoon {
+      position: fixed;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      filter: drop-shadow(4px 4px 0px #000);
+      transition: transform 0.05s linear;
+    }
+
+    .float-cartoon:active {
+      cursor: grabbing;
+      transform: scale(1.12) rotate(4deg) !important;
+      z-index: 50;
+    }
+
+    /* Expressive Pop Speech Bubbles */
+    .cartoon-speech {
+      background: #ffffff;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 900;
+      max-width: 190px;
+      text-align: center;
+      margin-bottom: 10px;
+      border-radius: 14px;
+      pointer-events: none;
+      position: relative;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    /* Speech Bubble Tail Arrow */
+    .cartoon-speech::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px 10px 0;
+      border-style: solid;
+      border-color: #000 transparent;
+      display: block;
+      width: 0;
+    }
+
+    /* Animation Keyframes */
+    @keyframes floatY1 {
+      0%, 100% { transform: translateY(0px) rotate(-3deg); }
+      50% { transform: translateY(-16px) rotate(3deg); }
+    }
+
+    @keyframes floatY2 {
+      0%, 100% { transform: translateY(0px) rotate(4deg); }
+      50% { transform: translateY(16px) rotate(-3deg); }
+    }
+
+    /* Default Corner Positioning */
+    .c1 { top: 7%; left: 4%; animation: floatY1 4.5s ease-in-out infinite; }
+    .c2 { top: 8%; right: 4%; animation: floatY2 5s ease-in-out infinite; }
+    .c3 { bottom: 6%; left: 5%; animation: floatY2 4.2s ease-in-out infinite; }
+    .c4 { bottom: 7%; right: 5%; animation: floatY1 5.5s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Cartoon 1: Sarcastic Ammavan -->
+  <div class="float-cartoon c1" id="cartoon1">
+    <div class="cartoon-speech ml-text" id="speech1">👴 "12 കൊല്ലം കാത്തിരുന്നോ!"</div>
+    <svg width="95" height="95" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="42" fill="#ffde59" stroke="#000" stroke-width="4"/>
+      <!-- Tufts of side hair -->
+      <path d="M 8 45 Q 2 30 14 38 Z" fill="#fff" stroke="#000" stroke-width="3"/>
+      <path d="M 92 45 Q 98 30 86 38 Z" fill="#fff" stroke="#000" stroke-width="3"/>
+      <!-- Expressive Eyebrows -->
+      <path d="M 24 32 L 42 38" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 76 32 L 58 38" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+      <!-- Glasses -->
+      <circle cx="34" cy="46" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
+      <circle cx="66" cy="46" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
+      <line x1="45" y1="46" x2="55" y2="46" stroke="#000" stroke-width="4"/>
+      <!-- Eyes looking suspicious -->
+      <circle cx="37" cy="46" r="4" fill="#000"/>
+      <circle cx="69" cy="46" r="4" fill="#000"/>
+      <!-- Thick Malayalam Mustache -->
+      <path d="M 22 65 Q 50 50 78 65 Q 50 82 22 65 Z" fill="#000"/>
+    </svg>
+  </div>
+
+  <!-- Floating Cartoon 2: Goofy Dog -->
+  <div class="float-cartoon c2" id="cartoon2">
+    <div class="cartoon-speech ml-text" id="speech2">🐕 "വാൽ നിവർത്താൻ നോക്കണ്ട!"</div>
+    <svg width="95" height="95" viewBox="0 0 100 100">
+      <!-- Floppy Ears -->
+      <path d="M 18 30 C -2 10 12 -5 28 20 Z" fill="#d97706" stroke="#000" stroke-width="4"/>
+      <path d="M 82 30 C 102 10 88 -5 72 20 Z" fill="#d97706" stroke="#000" stroke-width="4"/>
+      <!-- Head -->
+      <circle cx="50" cy="52" r="38" fill="#22c55e" stroke="#000" stroke-width="4"/>
+      <!-- Goofy Eyes -->
+      <circle cx="36" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/>
+      <circle cx="64" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/>
+      <circle cx="38" cy="44" r="3" fill="#000"/>
+      <circle cx="62" cy="44" r="3" fill="#000"/>
+      <!-- Dog Snout & Tongue -->
+      <ellipse cx="50" cy="58" rx="14" ry="10" fill="#fff" stroke="#000" stroke-width="3"/>
+      <polygon points="50,52 42,58 58,58" fill="#000"/>
+      <path d="M 46 66 Q 50 78 54 66 Z" fill="#ff007f" stroke="#000" stroke-width="2"/>
+      <!-- Spring Curled Tail on side -->
+      <path d="M 82 68 C 105 50 90 25 78 38 C 70 48 88 58 76 65" fill="none" stroke="#ffde59" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Floating Cartoon 3: Tired Sweat-dripping PVC Pipe -->
+  <div class="float-cartoon c3" id="cartoon3">
+    <div class="cartoon-speech ml-text" id="speech3">🧪 "കുഴൽ പൊട്ടിത്തെറിക്കും!"</div>
+    <svg width="95" height="95" viewBox="0 0 100 100">
+      <!-- Pipe Body -->
+      <rect x="15" y="32" width="70" height="36" fill="#cbd5e1" stroke="#000" stroke-width="4" rx="6"/>
+      <rect x="10" y="26" width="14" height="48" fill="#64748b" stroke="#000" stroke-width="4" rx="2"/>
+      <rect x="76" y="26" width="14" height="48" fill="#64748b" stroke="#000" stroke-width="4" rx="2"/>
+      <!-- Cartoon Tired Eyes on Pipe -->
+      <circle cx="40" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+      <circle cx="60" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2"/>
+      <line x1="36" y1="42" x2="44" y2="44" stroke="#000" stroke-width="2"/>
+      <line x1="64" y1="42" x2="56" y2="44" stroke="#000" stroke-width="2"/>
+      <path d="M 44 58 Q 50 52 56 58" fill="none" stroke="#000" stroke-width="3"/>
+      <!-- Sweat Drops -->
+      <path d="M 28 22 Q 24 30 28 32 Q 32 30 28 22 Z" fill="#00f0ff" stroke="#000" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- Floating Cartoon 4: Angry Fire CSS !important Bomb -->
+  <div class="float-cartoon c4" id="cartoon4">
+    <div class="cartoon-speech" id="speech4">🔥 "!IMPORTANT WON'T HELP!"</div>
+    <svg width="95" height="95" viewBox="0 0 100 100">
+      <!-- Flame body -->
+      <path d="M 50 10 C 70 30 90 50 80 75 C 70 95 30 95 20 75 C 10 50 30 30 50 10 Z" fill="#ff007f" stroke="#000" stroke-width="4"/>
+      <path d="M 50 30 C 62 42 72 58 65 72 C 58 84 42 84 35 72 C 30 58 38 42 50 30 Z" fill="#ffde59" stroke="#000" stroke-width="3"/>
+      <!-- Sunglasses on Flame -->
+      <polygon points="28,48 48,48 44,58 32,58" fill="#000"/>
+      <polygon points="52,48 72,48 68,58 56,58" fill="#000"/>
+      <line x1="48" y1="50" x2="52" y2="50" stroke="#000" stroke-width="3"/>
+      <!-- Smirk -->
+      <path d="M 40 68 Q 50 74 60 66" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Central Question Card -->
+  <div class="home-card">
+    <h1 class="main-question">
+      Do you really think 12 years inside a PVC pipe will straighten a dog's tail?
+      <br>
+      <span class="ml-badge ml-text">"പട്ടിയുടെ വാല് 12 കൊല്ലം കുഴലിലിട്ടാൽ നിവരുമോ?"</span>
+    </h1>
+
+    <a href="index.html" class="enter-btn">
+      🚀 ENTER THE LIVE LAB
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Automatic Dialogue Arrays for each cartoon character
+    const dialogues = {
+      ammavan: [
+        "👴 \"12 കൊല്ലം കാത്തിരുന്നോ!\"",
+        "👴 \"നിവരില്ല എന്ന് പറഞ്ഞാൽ നിവരില്ല!\"",
+        "👴 \"ഓരോരോ സയൻസ് കണ്ടുപിടിത്തങ്ങൾ!\"",
+        "👴 \"Ammavan knows best!\""
+      ],
+      dog: [
+        "🐕 \"വാൽ നിവർത്താൻ നോക്കണ്ട!\"",
+        "🐕 \"Woof! 12 years of bending!\"",
+        "🐕 \"My tail = 100% curve!\"",
+        "🐕 \"Tail elasticity > 9000!\""
+      ],
+      pipe: [
+        "🧪 \"കുഴൽ പൊട്ടിത്തെറിക്കും!\"",
+        "🧪 \"Pressure too high!\"",
+        "🧪 \"I'm flexing as hard as I can!\"",
+        "🧪 \"12 years and still 180°!\""
+      ],
+      flame: [
+        "🔥 \"!IMPORTANT WON'T HELP!\"",
+        "🔥 \"CSS won't fix biology!\"",
+        "🔥 \"ഹൈഡ്രോളിക് പവർ വേണ്ടിവരും!\"",
+        "🔥 \"Error 404: Straight tail not found!\""
+      ]
+    };
+
+    let idx1 = 0, idx2 = 0, idx3 = 0, idx4 = 0;
+
+    // Helper function to animate speech bubble change
+    function updateSpeech(elementId, textArray, currentIndex) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      
+      el.style.opacity = '0';
+      el.style.transform = 'scale(0.8)';
+      
+      setTimeout(() => {
+        el.textContent = textArray[currentIndex];
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Dialogue Rotation Interval (Every 3.5 seconds)
+    setInterval(() => {
+      idx1 = (idx1 + 1) % dialogues.ammavan.length;
+      idx2 = (idx2 + 1) % dialogues.dog.length;
+      idx3 = (idx3 + 1) % dialogues.pipe.length;
+      idx4 = (idx4 + 1) % dialogues.flame.length;
+
+      updateSpeech('speech1', dialogues.ammavan, idx1);
+      setTimeout(() => updateSpeech('speech2', dialogues.dog, idx2), 400);
+      setTimeout(() => updateSpeech('speech3', dialogues.pipe, idx3), 800);
+      setTimeout(() => updateSpeech('speech4', dialogues.flame, idx4), 1200);
+    }, 3500);
+
+    // Draggable functionality (Supports Touch & Mouse)
+    function enableDragging(el) {
+      let posX = 0, posY = 0, initialX = 0, initialY = 0;
+
+      el.addEventListener('mousedown', dragStart);
+      el.addEventListener('touchstart', dragStart, { passive: false });
+
+      function dragStart(e) {
+        // Pause CSS float keyframe while dragging
+        el.style.animation = 'none';
+
+        if (e.type === 'touchstart') {
+          initialX = e.touches[0].clientX - posX;
+          initialY = e.touches[0].clientY - posY;
+          document.addEventListener('touchmove', dragging, { passive: false });
+          document.addEventListener('touchend', dragEnd);
+        } else {
+          initialX = e.clientX - posX;
+          initialY = e.clientY - posY;
+          document.addEventListener('mousemove', dragging);
+          document.addEventListener('mouseup', dragEnd);
+        }
+      }
+
+      function dragging(e) {
+        e.preventDefault();
+        const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const currentY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+        posX = currentX - initialX;
+        posY = currentY - initialY;
+
+        el.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+      }
+
+      function dragEnd() {
+        document.removeEventListener('mousemove', dragging);
+        document.removeEventListener('mouseup', dragEnd);
+        document.removeEventListener('touchmove', dragging);
+        document.removeEventListener('touchend', dragEnd);
+      }
+    }
+
+    // Attach dragging to all 4 cartoon elements
+    document.querySelectorAll('.float-cartoon').forEach(el => {
+      enableDragging(el);
+    });
+  </script>
+</body>
+</html>
