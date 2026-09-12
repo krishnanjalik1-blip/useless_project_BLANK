@@ -49,15 +49,21 @@ For Software:
 ### Project Documentation
 For Software:
 
-# Screenshots (Add at least 3)
+# Screenshots
 
-<img src="" alt="App Dashboard" width="500">
+<img src="vaaal/Screenshot 2026-09-12 033858.png" alt="App Dashboard" width="500">
+Front page of the website
 
-![Screenshot2](Add screenshot 2 here with proper name)
+![Screenshot2]
+<img src="vaaal/Screenshot 2026-09-12 034824.png" alt="App Dashboard" width="500">
+Add 
+
+![Screenshot3]
+<img src="vaaal/Screenshot 2026-09-12 034329.png" alt="App Dashboard" width="500">
 *Add caption explaining what this shows*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+<img src="vaaal/Screenshot 2026-09-12 034255.png" alt="App Dashboard" width="500">
+<img src="vaaal/Screenshot 2026-09-12 034312.png" alt="App Dashboard" width="500">
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
