@@ -67,16 +67,14 @@ Some stupid entertainmets too
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+(https://drive.google.com/file/d/1AoJrWrZeTs4xLYfcimMG-kYn_fDltyOv/view?usp=drive_link)
+Video demostrates the working of the website
 
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Anjali Krishna K: PPT Making, Github ,TinkerhubApp handling
+- Saniya George: Coding(website building)
+
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
