@@ -41,7 +41,8 @@ For Software:
 https://krishnanjalik1-blip.github.io/useless_project_BLANK/
 
 ### Project Documentation
-For Software:
+For Software: https://docs.google.com/presentation/d/1kO-htZucRZEG7OD8wARaGVsCM9DqYqJW/edit?usp=sharing&ouid=114327392278229174104&rtpof=true&sd=true
+
 
 # Screenshots
 
