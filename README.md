@@ -52,18 +52,19 @@ For Software:
 # Screenshots
 
 <img src="vaaal/Screenshot 2026-09-12 033858.png" alt="App Dashboard" width="500">
-Front page of the website
+Frpage of the website
 
 ![Screenshot2]
 <img src="vaaal/Screenshot 2026-09-12 034824.png" alt="App Dashboard" width="500">
-Add 
+Breed selection, curvature dial, and the pressure/temperature control console
 
 ![Screenshot3]
-<img src="vaaal/Screenshot 2026-09-12 034329.png" alt="App Dashboard" width="500">
-*Add caption explaining what this shows*
+<img src="vaaal/Screenshot 2026-09-12 072441.png" alt="App Dashboard" width="500">
+Certificate of "nivarnilla"
 
 <img src="vaaal/Screenshot 2026-09-12 034255.png" alt="App Dashboard" width="500">
 <img src="vaaal/Screenshot 2026-09-12 034312.png" alt="App Dashboard" width="500">
+Some stupid entertainmets too
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
