@@ -22,7 +22,7 @@ There exists a well-known Malayalam proverb: "പട്ടിയുടെ വാ
 ### The Solution (that nobody asked for)
 VAALU-X computes a proprietary Tail Curvature Index (TCI) and a fictional Tail Relaxation Constant, then runs the Traditional Method and an AI-optimized Engineering Method side-by-side on live sliders (pressure, temperature, pipe diameter). A neural-sounding model, TailCurvNet™, predicts optimal force, temperature, and duration, complete with a suspiciously high confidence score. The results are plotted on a real-time graph, because no ridiculous claim is complete without a chart to back it up.
 
-Spoiler: the proverb wins. Every time. We built an entire simulation engine to arrive at the same conclusion your grandmother already knew.
+Spoiler: Nothing actually happens.
 
 ## Technical Details
 ### Technologies/Components Used
@@ -33,18 +33,12 @@ Frameworks: None — vanilla stack, deliberately overengineered
 Libraries: Native SVG rendering for live graphs and tail animation
 Tools: VS Code, Git, unreasonable amounts of confidence
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
 
 ### Implementation
 For Software:
-# Installation
-[commands]
 
 # Run
-[commands]
+https://krishnanjalik1-blip.github.io/useless_project_BLANK/
 
 ### Project Documentation
 For Software:
@@ -52,14 +46,14 @@ For Software:
 # Screenshots
 
 <img src="vaaal/Screenshot 2026-09-12 033858.png" alt="App Dashboard" width="500">
-Frpage of the website
+Front page of the website
 
-![Screenshot2]
+
 <img src="vaaal/Screenshot 2026-09-12 034824.png" alt="App Dashboard" width="500">
 Breed selection, curvature dial, and the pressure/temperature control console
 
-![Screenshot3]
-<img src="vaaal/Screenshot 2026-09-12 072441.png" alt="App Dashboard" width="500">
+
+<img src="Screenshot 2026-09-12 072441.png" alt="App Dashboard" width="500">
 Certificate of "nivarnilla"
 
 <img src="vaaal/Screenshot 2026-09-12 034255.png" alt="App Dashboard" width="500">
@@ -67,27 +61,9 @@ Certificate of "nivarnilla"
 Some stupid entertainmets too
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+<img src="WhatsApp Image 2026-09-12 at 7.33.58 AM.jpeg" alt="App Dashboard" width="500">
+ Dog parameters flow through signal conditioning, a PID controller, and an AI layer, all to actually do nothing.
 
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
